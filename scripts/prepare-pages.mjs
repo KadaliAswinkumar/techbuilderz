@@ -11,7 +11,28 @@ if (!serverEntry || typeof serverEntry.fetch !== "function") {
   throw new Error("Could not load dist/server/index.js fetch handler.");
 }
 
-const response = await serverEntry.fetch(new Request("https://example.com/"), {}, {});
+async function renderHtmlWithRedirects(startUrl) {
+  let currentUrl = startUrl;
+
+  for (let i = 0; i < 5; i += 1) {
+    const response = await serverEntry.fetch(new Request(currentUrl), {}, {});
+
+    if (response.status >= 300 && response.status < 400) {
+      const location = response.headers.get("location");
+      if (!location) {
+        throw new Error(`Got redirect status ${response.status} without location header.`);
+      }
+      currentUrl = new URL(location, currentUrl).toString();
+      continue;
+    }
+
+    return response;
+  }
+
+  throw new Error("Too many redirects while rendering SSR HTML.");
+}
+
+const response = await renderHtmlWithRedirects("https://example.com/");
 const renderedHtml = await response.text();
 
 if (!renderedHtml || response.status >= 400) {
