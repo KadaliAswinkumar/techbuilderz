@@ -311,40 +311,57 @@ function Index() {
               },
             ].map((p, i) => (
               <TiltCard key={i} className={`fade-up group ${p.h}`}>
-                <div className="glass relative block h-full overflow-hidden rounded-3xl p-7">
-                  <img
-                    src={p.img}
-                    alt={`${p.t} project preview`}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/40" />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${p.g} opacity-0 transition-opacity duration-500 group-hover:opacity-40`} />
-                  <div className="relative">
-                    <div className="font-mono text-xs text-muted-foreground">0{i + 1}</div>
-                  </div>
-                  <div className="absolute inset-x-7 bottom-7 flex items-end justify-between gap-4">
-                    <div>
-                      <div className="text-xs uppercase tracking-widest text-muted-foreground">{p.c}</div>
-                      <div className="mt-1 text-2xl font-semibold">{p.t}</div>
+                {p.url ? (
+                  <a
+                    href={p.url}
+                    target={p.url.startsWith("http") ? "_blank" : undefined}
+                    rel={p.url.startsWith("http") ? "noreferrer" : undefined}
+                    className="glass relative block h-full overflow-hidden rounded-3xl p-7"
+                    aria-label={`Open ${p.t}`}
+                  >
+                    <img
+                      src={p.img}
+                      alt={`${p.t} project preview`}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/40" />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${p.g} opacity-0 transition-opacity duration-500 group-hover:opacity-40`} />
+                    <div className="relative">
+                      <div className="font-mono text-xs text-muted-foreground">0{i + 1}</div>
                     </div>
-                    {p.url ? (
-                      <a
-                        href={p.url}
-                        target={p.url.startsWith("http") ? "_blank" : undefined}
-                        rel={p.url.startsWith("http") ? "noreferrer" : undefined}
-                        className="grid h-10 w-10 place-items-center rounded-full glass transition-transform group-hover:rotate-45"
-                        aria-label={`Open ${p.t}`}
-                      >
-                        ↗
-                      </a>
-                    ) : (
+                    <div className="absolute inset-x-7 bottom-7 flex items-end justify-between gap-4">
+                      <div>
+                        <div className="text-xs uppercase tracking-widest text-muted-foreground">{p.c}</div>
+                        <div className="mt-1 text-2xl font-semibold">{p.t}</div>
+                      </div>
+                      <span className="grid h-10 w-10 place-items-center rounded-full glass transition-transform group-hover:rotate-45">↗</span>
+                    </div>
+                  </a>
+                ) : (
+                  <div className="glass relative block h-full overflow-hidden rounded-3xl p-7">
+                    <img
+                      src={p.img}
+                      alt={`${p.t} project preview`}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/40" />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${p.g} opacity-0 transition-opacity duration-500 group-hover:opacity-40`} />
+                    <div className="relative">
+                      <div className="font-mono text-xs text-muted-foreground">0{i + 1}</div>
+                    </div>
+                    <div className="absolute inset-x-7 bottom-7 flex items-end justify-between gap-4">
+                      <div>
+                        <div className="text-xs uppercase tracking-widest text-muted-foreground">{p.c}</div>
+                        <div className="mt-1 text-2xl font-semibold">{p.t}</div>
+                      </div>
                       <span className="rounded-full glass px-3 py-1 text-[10px] uppercase tracking-wider text-muted-foreground">
                         Coming Soon
                       </span>
-                    )}
+                    </div>
                   </div>
-                </div>
+                )}
               </TiltCard>
             ))}
           </div>
@@ -425,11 +442,16 @@ function Index() {
             Have a project worth obsessing over? We're booking ambitious collaborations for Q3.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <button className="shimmer glow-pulse rounded-full bg-gradient-primary px-8 py-4 text-sm font-semibold text-primary-foreground">
-              Start a Project →
-            </button>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="shimmer glass rounded-full px-8 py-4 text-sm font-semibold">
-              {CONTACT_EMAIL}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="shimmer glow-pulse rounded-full bg-gradient-primary px-8 py-4 text-sm font-semibold text-primary-foreground">
+              Email Us
+            </a>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="shimmer glass rounded-full px-8 py-4 text-sm font-semibold"
+            >
+              Whatsapp Us
             </a>
           </div>
         </motion.div>

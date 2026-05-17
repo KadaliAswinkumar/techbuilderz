@@ -27,9 +27,9 @@ export function Nav() {
           </a>
         ))}
       </div>
-      <button className="shimmer glass rounded-full px-5 py-2 text-sm font-medium">
+      <a href="#contact" className="shimmer glass rounded-full px-5 py-2 text-sm font-medium">
         Start Project
-      </button>
+      </a>
     </nav>
   );
 }
