@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import { Boxes, Sparkles, Palette, Package, Mail, Phone, Linkedin, MessageCircle, X, Send } from "lucide-react";
 import { Hero3D } from "@/components/sites/Hero3D";
 import { MagneticCursor } from "@/components/sites/Cursor";
 import { Loader } from "@/components/sites/Loader";
@@ -26,11 +27,34 @@ export const Route = createFileRoute("/")({
 
 const HEADLINE = "Beyond the Interface.";
 const SUB = "Crafting Tomorrow.";
+const CONTACT_EMAIL = "kadaliaswinkumar@gmail.com";
+const WHATSAPP_NUMBER = "+91 9398431573";
+const WHATSAPP_LINK = "https://wa.me/919398431573";
+const LINKEDIN_LINK = "https://www.linkedin.com/company/tech-builderz/";
+
+const CHATBOT_RESPONSES: Record<string, string> = {
+  services:
+    "We help with product websites, branding, UI/UX, frontend engineering, and launch-ready SaaS experiences.",
+  timeline:
+    "Most projects are delivered in 2-6 weeks depending on scope, feedback cycles, and integrations.",
+  pricing:
+    "Pricing is based on requirements. Share your scope and we can provide a custom estimate quickly.",
+  contact:
+    `You can reach us at ${CONTACT_EMAIL} or WhatsApp ${WHATSAPP_NUMBER}.`,
+};
 
 function Index() {
   const horizontalRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [counts, setCounts] = useState([0, 0, 0, 0]);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [chatMessages, setChatMessages] = useState<Array<{ role: "bot" | "user"; text: string }>>([
+    {
+      role: "bot",
+      text: "Hi, I am TecH BuilderZ assistant. Ask about services, timeline, pricing, or contact.",
+    },
+  ]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -153,14 +177,17 @@ function Index() {
             </p>
           </div>
           {[
-            { t: "3D & WebGL", d: "Real-time graphics, generative geometry, and immersive scenes built on Three.js & WebGPU.", n: "01" },
-            { t: "Motion Systems", d: "Choreographed timelines, scroll narratives, and micro-interactions tuned to 60fps perfection.", n: "02" },
-            { t: "Brand Identity", d: "Typographic systems, kinetic logos, and editorial design that scales across surfaces.", n: "03" },
-            { t: "Product Engineering", d: "Performant React applications, design systems, and infrastructure for ambitious teams.", n: "04" },
+            { t: "3D & WebGL", d: "Real-time graphics, generative geometry, and immersive scenes built on Three.js & WebGPU.", n: "01", icon: Boxes },
+            { t: "Motion Systems", d: "Choreographed timelines, scroll narratives, and micro-interactions tuned to 60fps perfection.", n: "02", icon: Sparkles },
+            { t: "Brand Identity", d: "Typographic systems, kinetic logos, and editorial design that scales across surfaces.", n: "03", icon: Palette },
+            { t: "Product Engineering", d: "Performant React applications, design systems, and infrastructure for ambitious teams.", n: "04", icon: Package },
           ].map((c) => (
             <TiltCard key={c.n} className="w-[28vw] shrink-0">
               <div className="glass relative h-[60vh] rounded-3xl p-8">
                 <div className="font-mono text-xs text-accent">{c.n} / 04</div>
+                <div className="mt-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-accent">
+                  <c.icon size={24} />
+                </div>
                 <div className="absolute inset-x-8 bottom-8">
                   <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/30 to-transparent" />
                   <h3 className="mt-6 text-3xl font-semibold">{c.t}</h3>
@@ -241,7 +268,7 @@ function Index() {
                 h: "h-[340px]",
                 g: "from-[#ffae00] to-[#ff5cb1]",
                 img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1400&q=80",
-                url: "https://github.com/KadaliAswinkumar/Emily",
+                url: null,
               },
               {
                 t: "Portfolio",
@@ -249,16 +276,11 @@ function Index() {
                 h: "h-[340px]",
                 g: "from-[#6b5cff] to-[#ff5cb1]",
                 img: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1400&q=80",
-                url: "https://github.com/KadaliAswinkumar/Emily",
+                url: "https://kadaliaswinkumar.github.io/kadaliaswinkumar.in/",
               },
             ].map((p, i) => (
               <TiltCard key={i} className={`fade-up group ${p.h}`}>
-                <a
-                  href={p.url}
-                  target={p.url.startsWith("http") ? "_blank" : undefined}
-                  rel={p.url.startsWith("http") ? "noreferrer" : undefined}
-                  className="glass relative block h-full overflow-hidden rounded-3xl p-7"
-                >
+                <div className="glass relative block h-full overflow-hidden rounded-3xl p-7">
                   <img
                     src={p.img}
                     alt={`${p.t} project preview`}
@@ -275,9 +297,23 @@ function Index() {
                       <div className="text-xs uppercase tracking-widest text-muted-foreground">{p.c}</div>
                       <div className="mt-1 text-2xl font-semibold">{p.t}</div>
                     </div>
-                    <div className="grid h-10 w-10 place-items-center rounded-full glass transition-transform group-hover:rotate-45">↗</div>
+                    {p.url ? (
+                      <a
+                        href={p.url}
+                        target={p.url.startsWith("http") ? "_blank" : undefined}
+                        rel={p.url.startsWith("http") ? "noreferrer" : undefined}
+                        className="grid h-10 w-10 place-items-center rounded-full glass transition-transform group-hover:rotate-45"
+                        aria-label={`Open ${p.t}`}
+                      >
+                        ↗
+                      </a>
+                    ) : (
+                      <span className="rounded-full glass px-3 py-1 text-[10px] uppercase tracking-wider text-muted-foreground">
+                        Coming Soon
+                      </span>
+                    )}
                   </div>
-                </a>
+                </div>
               </TiltCard>
             ))}
           </div>
@@ -361,8 +397,8 @@ function Index() {
             <button className="shimmer glow-pulse rounded-full bg-gradient-primary px-8 py-4 text-sm font-semibold text-primary-foreground">
               Start a Project →
             </button>
-            <a href="mailto:hello@techbuilderz.com" className="shimmer glass rounded-full px-8 py-4 text-sm font-semibold">
-              hello@techbuilderz.com
+            <a href={`mailto:${CONTACT_EMAIL}`} className="shimmer glass rounded-full px-8 py-4 text-sm font-semibold">
+              {CONTACT_EMAIL}
             </a>
           </div>
         </motion.div>
@@ -375,25 +411,123 @@ function Index() {
             © 2026 TecH BuilderZ. Designed in motion.
           </div>
           <div className="flex flex-wrap items-center gap-3 text-sm">
-            {[
-              "Privacy Policy",
-              "Terms & Conditions",
-              "Twitter",
-              "Instagram",
-              "Dribbble",
-              "LinkedIn",
-            ].map((l) => (
-              <a
-                key={l}
-                href="#"
-                className="shimmer glass rounded-full px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {l}
-              </a>
-            ))}
+            <a
+              href="/privacy-policy"
+              className="shimmer glass rounded-full px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/terms-and-conditions"
+              className="shimmer glass rounded-full px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Terms & Conditions
+            </a>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="shimmer glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Mail size={14} />
+              {CONTACT_EMAIL}
+            </a>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="shimmer glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Phone size={14} />
+              {WHATSAPP_NUMBER}
+            </a>
+            <a
+              href={LINKEDIN_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="shimmer glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Linkedin size={14} />
+              LinkedIn
+            </a>
           </div>
         </div>
       </footer>
+
+      {/* CHATBOT */}
+      <div className="fixed bottom-6 right-6 z-[250]">
+        {chatOpen && (
+          <div className="mb-3 w-[320px] rounded-2xl border border-white/10 bg-background/95 p-4 shadow-2xl backdrop-blur">
+            <div className="mb-3 flex items-center justify-between">
+              <div className="text-sm font-semibold">TecH BuilderZ Assistant</div>
+              <button
+                onClick={() => setChatOpen(false)}
+                className="rounded-full p-1 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
+                aria-label="Close chat"
+              >
+                <X size={14} />
+              </button>
+            </div>
+            <div className="mb-3 max-h-56 space-y-2 overflow-y-auto">
+              {chatMessages.map((m, i) => (
+                <div key={`${m.role}-${i}`} className={`rounded-xl px-3 py-2 text-xs ${m.role === "bot" ? "bg-white/10 text-foreground" : "bg-gradient-primary text-primary-foreground"}`}>
+                  {m.text}
+                </div>
+              ))}
+            </div>
+            <div className="mb-2 flex gap-2">
+              {["services", "timeline", "pricing", "contact"].map((q) => (
+                <button
+                  key={q}
+                  onClick={() => {
+                    setChatMessages((prev) => [
+                      ...prev,
+                      { role: "user", text: q },
+                      { role: "bot", text: CHATBOT_RESPONSES[q] },
+                    ]);
+                  }}
+                  className="rounded-full border border-white/10 px-2 py-1 text-[10px] uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const raw = chatInput.trim();
+                if (!raw) return;
+                const key = raw.toLowerCase();
+                const answer =
+                  CHATBOT_RESPONSES[key] ??
+                  "Thanks for your message. Please email kadaliaswinkumar@gmail.com for custom queries.";
+                setChatMessages((prev) => [...prev, { role: "user", text: raw }, { role: "bot", text: answer }]);
+                setChatInput("");
+              }}
+              className="flex items-center gap-2"
+            >
+              <input
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                placeholder="Ask a quick question..."
+                className="w-full rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs outline-none focus:border-accent"
+              />
+              <button
+                type="submit"
+                className="rounded-full bg-gradient-primary p-2 text-primary-foreground"
+                aria-label="Send message"
+              >
+                <Send size={14} />
+              </button>
+            </form>
+          </div>
+        )}
+        <button
+          onClick={() => setChatOpen((prev) => !prev)}
+          className="shimmer glow-pulse inline-flex items-center gap-2 rounded-full bg-gradient-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+        >
+          <MessageCircle size={16} />
+          Chat
+        </button>
+      </div>
     </div>
   );
 }
