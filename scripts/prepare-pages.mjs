@@ -39,13 +39,7 @@ if (!renderedHtml || response.status >= 400) {
   throw new Error(`Could not render SSR HTML for Pages (status: ${response.status}).`);
 }
 
-const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1];
-const basePath = process.env.GITHUB_ACTIONS === "true" && repoName ? `/${repoName}` : "";
-const assetPrefix = `${basePath}/assets/`;
-
-const html = renderedHtml
-  .replaceAll('"/assets/', `"${assetPrefix}`)
-  .replaceAll("'/assets/", `'${assetPrefix}`);
+const html = renderedHtml;
 
 await writeFile(path.join(clientDir, "index.html"), html, "utf8");
 await copyFile(path.join(clientDir, "index.html"), path.join(clientDir, "404.html"));
