@@ -20,7 +20,7 @@ export function Nav() {
         <span className="text-lg font-semibold tracking-tight">TecH <span className="text-gradient">BuilderZ</span></span>
       </div>
       <div className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-        {["Work", "About", "Process", "Contact"].map(l => (
+        {["Work", "About", "Contact"].map(l => (
           <a key={l} href={`#${l.toLowerCase()}`} className="relative transition-colors hover:text-foreground">
             {l}
             <span className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-primary transition-all duration-300 group-hover:w-full" />

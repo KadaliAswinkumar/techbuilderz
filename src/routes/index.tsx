@@ -177,18 +177,49 @@ function Index() {
             </p>
           </div>
           {[
-            { t: "3D & WebGL", d: "Real-time graphics, generative geometry, and immersive scenes built on Three.js & WebGPU.", n: "01", icon: Boxes },
-            { t: "Motion Systems", d: "Choreographed timelines, scroll narratives, and micro-interactions tuned to 60fps perfection.", n: "02", icon: Sparkles },
-            { t: "Brand Identity", d: "Typographic systems, kinetic logos, and editorial design that scales across surfaces.", n: "03", icon: Palette },
-            { t: "Product Engineering", d: "Performant React applications, design systems, and infrastructure for ambitious teams.", n: "04", icon: Package },
+            {
+              t: "3D & WebGL",
+              d: "Real-time graphics, generative geometry, and immersive scenes built on Three.js & WebGPU.",
+              n: "01",
+              icon: Boxes,
+              img: "https://images.unsplash.com/photo-1633419461186-7d40a38105ec?auto=format&fit=crop&w=1200&q=80",
+            },
+            {
+              t: "Motion Systems",
+              d: "Choreographed timelines, scroll narratives, and micro-interactions tuned to 60fps perfection.",
+              n: "02",
+              icon: Sparkles,
+              img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80",
+            },
+            {
+              t: "Brand Identity",
+              d: "Typographic systems, kinetic logos, and editorial design that scales across surfaces.",
+              n: "03",
+              icon: Palette,
+              img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80",
+            },
+            {
+              t: "Product Engineering",
+              d: "Performant React applications, design systems, and infrastructure for ambitious teams.",
+              n: "04",
+              icon: Package,
+              img: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+            },
           ].map((c) => (
             <TiltCard key={c.n} className="w-[28vw] shrink-0">
               <div className="glass relative h-[60vh] rounded-3xl p-8">
+                <img
+                  src={c.img}
+                  alt={`${c.t} capability visual`}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full rounded-3xl object-cover opacity-40 transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-black/20 via-black/50 to-black/85" />
                 <div className="font-mono text-xs text-accent">{c.n} / 04</div>
-                <div className="mt-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-accent">
+                <div className="mt-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-black/30 text-accent backdrop-blur">
                   <c.icon size={24} />
                 </div>
-                <div className="absolute inset-x-8 bottom-8">
+                <div className="absolute inset-x-8 bottom-8 z-10">
                   <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/30 to-transparent" />
                   <h3 className="mt-6 text-3xl font-semibold">{c.t}</h3>
                   <p className="mt-3 text-sm text-muted-foreground">{c.d}</p>
