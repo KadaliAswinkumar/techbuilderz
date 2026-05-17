@@ -484,27 +484,27 @@ function Index() {
       </footer>
 
       {/* CHATBOT */}
-      <div className="fixed bottom-6 right-6 z-[250]">
+      <div className="fixed bottom-5 left-4 right-4 z-[250] flex flex-col items-end gap-3 sm:left-auto sm:right-6">
         {chatOpen && (
-          <div className="mb-3 w-[320px] rounded-2xl border border-white/10 bg-background/95 p-4 shadow-2xl backdrop-blur">
-            <div className="mb-3 flex items-center justify-between">
-              <div className="text-sm font-semibold">TecH BuilderZ Assistant</div>
+          <div className="w-full rounded-3xl border border-white/10 bg-background/95 p-5 shadow-2xl backdrop-blur sm:w-[420px] md:w-[460px]">
+            <div className="mb-4 flex items-center justify-between">
+              <div className="text-[22px] font-semibold leading-none">TecH BuilderZ Assistant</div>
               <button
                 onClick={() => setChatOpen(false)}
                 className="rounded-full p-1 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
                 aria-label="Close chat"
               >
-                <X size={14} />
+                <X size={20} />
               </button>
             </div>
-            <div className="mb-3 max-h-56 space-y-2 overflow-y-auto">
+            <div className="mb-4 max-h-56 space-y-2 overflow-y-auto">
               {chatMessages.map((m, i) => (
                 <div key={`${m.role}-${i}`} className={`rounded-xl px-3 py-2 text-xs ${m.role === "bot" ? "bg-white/10 text-foreground" : "bg-gradient-primary text-primary-foreground"}`}>
                   {m.text}
                 </div>
               ))}
             </div>
-            <div className="mb-2 flex gap-2">
+            <div className="mb-3 flex flex-wrap gap-2">
               {["services", "timeline", "pricing", "contact"].map((q) => (
                 <button
                   key={q}
@@ -533,29 +533,29 @@ function Index() {
                 setChatMessages((prev) => [...prev, { role: "user", text: raw }, { role: "bot", text: answer }]);
                 setChatInput("");
               }}
-              className="flex items-center gap-2"
+              className="flex items-center gap-3"
             >
               <input
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 placeholder="Ask a quick question..."
-                className="w-full rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs outline-none focus:border-accent"
+                className="h-12 w-full rounded-full border border-white/10 bg-white/5 px-4 text-base outline-none focus:border-accent"
               />
               <button
                 type="submit"
-                className="rounded-full bg-gradient-primary p-2 text-primary-foreground"
+                className="grid h-12 w-12 place-items-center rounded-full bg-gradient-primary text-primary-foreground"
                 aria-label="Send message"
               >
-                <Send size={14} />
+                <Send size={20} />
               </button>
             </form>
           </div>
         )}
         <button
           onClick={() => setChatOpen((prev) => !prev)}
-          className="shimmer glow-pulse inline-flex items-center gap-2 rounded-full bg-gradient-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+          className="shimmer glow-pulse inline-flex items-center gap-3 rounded-full bg-gradient-primary px-6 py-4 text-lg font-semibold text-primary-foreground sm:text-xl"
         >
-          <MessageCircle size={16} />
+          <MessageCircle size={24} />
           Chat
         </button>
       </div>
