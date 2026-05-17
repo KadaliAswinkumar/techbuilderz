@@ -91,8 +91,8 @@ function PrivacyPolicyPage() {
             <h2 className="text-xl font-semibold">Contact Us</h2>
             <p className="mt-3 text-sm text-muted-foreground">
               For privacy-related requests, contact:{" "}
-              <a href="mailto:kadaliaswinkumar@gmail.com" className="text-accent hover:underline">
-                kadaliaswinkumar@gmail.com
+              <a href="mailto:team@techbuilderz.in" className="text-accent hover:underline">
+                team@techbuilderz.in
               </a>
             </p>
           </section>

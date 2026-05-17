@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
 
 const HEADLINE = "Beyond the Interface.";
 const SUB = "Crafting Tomorrow.";
-const CONTACT_EMAIL = "kadaliaswinkumar@gmail.com";
+const CONTACT_EMAIL = "team@techbuilderz.in";
 const WHATSAPP_NUMBER = "+91 9398431573";
 const WHATSAPP_LINK = "https://wa.me/919398431573";
 const LINKEDIN_LINK = "https://www.linkedin.com/company/tech-builderz/";
@@ -151,9 +151,9 @@ function Index() {
             We design and engineer immersive digital experiences at the intersection of 3D, motion, and storytelling.
           </p>
           <div className="hero-cta mt-10 flex items-center justify-center gap-4">
-            <button className="shimmer glow-pulse rounded-full bg-gradient-primary px-8 py-4 text-sm font-semibold text-primary-foreground">
+            <a href="#work" className="shimmer glow-pulse rounded-full bg-gradient-primary px-8 py-4 text-sm font-semibold text-primary-foreground">
               Explore Our Work
-            </button>
+            </a>
           </div>
         </div>
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -291,7 +291,7 @@ function Index() {
                 h: "h-[340px]",
                 g: "from-[#00e5ff] to-[#6bff9e]",
                 img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
-                url: "#hero",
+                url: "https://techbuilderz.in/",
               },
               {
                 t: "Emily",
@@ -551,7 +551,7 @@ function Index() {
                 const key = raw.toLowerCase();
                 const answer =
                   CHATBOT_RESPONSES[key] ??
-                  "Thanks for your message. Please email kadaliaswinkumar@gmail.com for custom queries.";
+                  "Thanks for your message. Please email team@techbuilderz.in for custom queries.";
                 setChatMessages((prev) => [...prev, { role: "user", text: raw }, { role: "bot", text: answer }]);
                 setChatInput("");
               }}
