@@ -13,14 +13,14 @@ export function Loader() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className={`fixed inset-0 z-[300] flex flex-col items-center justify-center bg-background transition-opacity duration-700 ${done ? "pointer-events-none opacity-0" : "opacity-100"}`}>
+    <div className={`fixed inset-0 z-[300] flex flex-col items-center justify-center bg-background transition-all duration-700 ${done ? "pointer-events-none -translate-y-full opacity-0" : "translate-y-0 opacity-100"}`}>
       <div className="relative h-24 w-24" style={{ perspective: 800 }}>
         <div className="absolute inset-0 animate-spin rounded-2xl bg-gradient-primary opacity-80 shadow-glow" style={{ animationDuration: "2s" }} />
         <div className="absolute inset-2 rounded-xl bg-background" />
-        <div className="absolute inset-0 flex items-center justify-center text-xl font-bold text-gradient">N</div>
+        <div className="glitch-flicker absolute inset-0 flex items-center justify-center text-xl font-bold text-gradient">T</div>
       </div>
-      <div className="mt-10 h-[2px] w-64 overflow-hidden rounded-full bg-white/10">
-        <div className="h-full bg-gradient-primary transition-all duration-200" style={{ width: `${p}%` }} />
+      <div className="mt-10 h-[3px] w-72 overflow-hidden rounded-full bg-white/10">
+        <div className="h-full bg-gradient-primary transition-all duration-200" style={{ width: `${p}%`, boxShadow: "0 0 18px rgba(0,191,255,0.8)" }} />
       </div>
       <div className="mt-3 font-mono text-xs tracking-widest text-muted-foreground">{Math.floor(p)}%  LOADING EXPERIENCE</div>
     </div>

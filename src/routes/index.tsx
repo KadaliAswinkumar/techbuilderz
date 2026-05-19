@@ -3,7 +3,24 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
-import { Boxes, Sparkles, Palette, Package, Mail, Phone, Linkedin, MessageCircle, X, Send } from "lucide-react";
+import {
+  Boxes,
+  Sparkles,
+  Palette,
+  Package,
+  Mail,
+  Phone,
+  Linkedin,
+  MessageCircle,
+  X,
+  Send,
+  Globe,
+  Smartphone,
+  Cloud,
+  Search,
+  Cog,
+  Rocket,
+} from "lucide-react";
 import { Hero3D } from "@/components/sites/Hero3D";
 import { MagneticCursor } from "@/components/sites/Cursor";
 import { Loader } from "@/components/sites/Loader";
@@ -32,6 +49,37 @@ const WHATSAPP_NUMBER = "+91 9398431573";
 const WHATSAPP_LINK = "https://wa.me/919398431573";
 const LINKEDIN_LINK = "https://www.linkedin.com/company/tech-builderz/";
 
+const CAPABILITIES = [
+  {
+    t: "3D & WebGL",
+    d: "Real-time graphics, generative geometry, and immersive scenes built on Three.js & WebGPU.",
+    n: "01",
+    icon: Boxes,
+    img: "https://images.unsplash.com/photo-1633419461186-7d40a38105ec?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    t: "Motion Systems",
+    d: "Choreographed timelines, scroll narratives, and micro-interactions tuned to 60fps perfection.",
+    n: "02",
+    icon: Sparkles,
+    img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    t: "Brand Identity",
+    d: "Typographic systems, kinetic logos, and editorial design that scales across surfaces.",
+    n: "03",
+    icon: Palette,
+    img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    t: "Product Engineering",
+    d: "Performant React applications, design systems, and infrastructure for ambitious teams.",
+    n: "04",
+    icon: Package,
+    img: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+  },
+] as const;
+
 const CHATBOT_RESPONSES: Record<string, string> = {
   services:
     "We help with product websites, branding, UI/UX, frontend engineering, and launch-ready SaaS experiences.",
@@ -42,6 +90,30 @@ const CHATBOT_RESPONSES: Record<string, string> = {
   contact:
     `You can reach us at ${CONTACT_EMAIL} or WhatsApp ${WHATSAPP_NUMBER}.`,
 };
+
+function CapabilityCard({ c }: { c: (typeof CAPABILITIES)[number] }) {
+  return (
+    <div className="glass relative h-full min-h-[380px] rounded-3xl p-8 sm:min-h-[420px] md:h-[60vh] md:min-h-0">
+      <img
+        src={c.img}
+        alt={`${c.t} capability visual`}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full rounded-3xl object-cover opacity-40 transition-transform duration-700 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-black/20 via-black/50 to-black/85" />
+      <div className="font-mono text-xs text-accent">{c.n} / 04</div>
+      <div className="mt-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-black/30 text-accent backdrop-blur">
+        <c.icon size={24} />
+      </div>
+      <div className="absolute inset-x-8 bottom-8 z-10">
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/30 to-transparent" />
+        <h3 className="mt-6 text-2xl font-semibold sm:text-3xl">{c.t}</h3>
+        <p className="mt-3 text-sm text-muted-foreground sm:text-base">{c.d}</p>
+      </div>
+      <div className="absolute right-8 top-8 h-16 w-16 rounded-full bg-gradient-primary opacity-30 blur-2xl" />
+    </div>
+  );
+}
 
 function Index() {
   const horizontalRef = useRef<HTMLDivElement>(null);
@@ -59,8 +131,8 @@ function Index() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Character reveal
-      gsap.from(".reveal-char", {
-        y: 80, opacity: 0, rotateX: -90, stagger: 0.03, duration: 1, ease: "expo.out", delay: 1.4,
+      gsap.from(".reveal-line", {
+        y: 50, opacity: 0, duration: 1, ease: "expo.out", delay: 1.2, stagger: 0.2,
       });
       gsap.from(".hero-sub", { y: 30, opacity: 0, duration: 1, delay: 2.2, ease: "expo.out" });
       gsap.from(".hero-cta", { scale: 0.6, opacity: 0, duration: 1, delay: 2.5, ease: "back.out(2)" });
@@ -68,28 +140,14 @@ function Index() {
       // Section fade-ups
       gsap.utils.toArray<HTMLElement>(".fade-up").forEach((el) => {
         gsap.from(el, {
-          y: 80, opacity: 0, duration: 1.1, ease: "expo.out",
-          scrollTrigger: { trigger: el, start: "top 85%" },
+          y: 80,
+          opacity: 0,
+          duration: 1.1,
+          ease: "expo.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: { trigger: el, start: "top 90%", once: true },
         });
       });
-
-      // Horizontal scroll
-      if (horizontalRef.current && trackRef.current) {
-        const track = trackRef.current;
-        const dist = () => track.scrollWidth - window.innerWidth;
-        gsap.to(track, {
-          x: () => -dist(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: horizontalRef.current,
-            start: "top top",
-            end: () => `+=${dist()}`,
-            scrub: 1,
-            pin: true,
-            invalidateOnRefresh: true,
-          },
-        });
-      }
 
       // Counters
       ScrollTrigger.create({
@@ -108,9 +166,60 @@ function Index() {
         },
       });
 
-      // Parallax hero layers
-      gsap.to(".par-fg", { yPercent: -20, ease: "none", scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true } });
-      gsap.to(".par-mg", { yPercent: -40, ease: "none", scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true } });
+      // Parallax hero layers (desktop only — avoids overlap with fixed nav on mobile)
+      gsap.matchMedia().add("(min-width: 768px)", () => {
+        gsap.to(".par-fg", { yPercent: -20, ease: "none", scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true } });
+        gsap.to(".par-mg", { yPercent: -40, ease: "none", scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true } });
+      });
+
+      gsap.matchMedia().add("(min-width: 768px)", () => {
+        if (horizontalRef.current && trackRef.current) {
+          const track = trackRef.current;
+          const dist = () => track.scrollWidth - window.innerWidth;
+          gsap.to(track, {
+            x: () => -dist(),
+            ease: "none",
+            scrollTrigger: {
+              trigger: horizontalRef.current,
+              start: "top top",
+              end: () => `+=${dist()}`,
+              scrub: 1,
+              pin: true,
+              invalidateOnRefresh: true,
+            },
+          });
+        }
+      });
+
+      gsap.from(".capability-card-mobile", {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power3.out",
+        clearProps: "opacity,transform",
+        scrollTrigger: { trigger: "#capabilities", start: "top 85%", once: true },
+      });
+
+      gsap.from(".process-step", {
+        y: 40,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power3.out",
+        clearProps: "opacity,transform",
+        scrollTrigger: { trigger: "#process", start: "top 82%", once: true },
+      });
+      gsap.fromTo(
+        ".process-line-path",
+        { strokeDashoffset: 1000 },
+        {
+          strokeDashoffset: 0,
+          duration: 1.8,
+          ease: "power2.out",
+          scrollTrigger: { trigger: "#process", start: "top 80%" },
+        },
+      );
     });
     return () => ctx.revert();
   }, []);
@@ -122,41 +231,30 @@ function Index() {
       <Nav />
 
       {/* HERO */}
-      <section id="hero" className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      <section id="hero" className="relative flex min-h-[100svh] items-center justify-center overflow-hidden pt-24 pb-16 sm:pt-28 md:pt-24">
         <div className="par-mg absolute inset-0">
           <Hero3D />
         </div>
+        <div className="hero-ambient pointer-events-none absolute inset-0" />
         <div className="par-mg pointer-events-none absolute inset-0 bg-radial" />
-        <div className="par-fg relative z-10 mx-auto max-w-5xl px-6 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+        <div className="par-fg relative z-10 mx-auto w-full max-w-5xl px-4 text-center sm:px-6">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:mb-6 sm:px-4 sm:text-xs sm:tracking-[0.2em]">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" /> Creative Studio · Est. 2026
           </div>
-          <h1 className="text-balance text-6xl font-bold leading-[1.05] md:text-8xl">
-            <span className="block">
-              {HEADLINE.split("").map((c, i) => (
-                <span key={i} className="reveal-char inline-block" style={{ transformOrigin: "bottom" }}>
-                  {c === " " ? "\u00A0" : c}
-                </span>
-              ))}
-            </span>
-            <span className="mt-2 block text-gradient">
-              {SUB.split("").map((c, i) => (
-                <span key={i} className="reveal-char inline-block" style={{ transformOrigin: "bottom" }}>
-                  {c === " " ? "\u00A0" : c}
-                </span>
-              ))}
-            </span>
+          <h1 className="text-balance text-[2rem] font-bold leading-[1.12] sm:text-5xl md:text-7xl lg:text-8xl">
+            <span className="reveal-line block">{HEADLINE}</span>
+            <span className="reveal-line mt-2 block text-gradient">{SUB}</span>
           </h1>
-          <p className="hero-sub mx-auto mt-8 max-w-xl text-balance text-base text-muted-foreground md:text-lg">
+          <p className="hero-sub mx-auto mt-6 max-w-xl text-balance text-sm leading-relaxed text-muted-foreground sm:mt-8 sm:text-base md:text-lg">
             We design and engineer immersive digital experiences at the intersection of 3D, motion, and storytelling.
           </p>
-          <div className="hero-cta mt-10 flex items-center justify-center gap-4">
-            <a href="#work" className="shimmer glow-pulse rounded-full bg-gradient-primary px-8 py-4 text-sm font-semibold text-primary-foreground">
+          <div className="hero-cta mt-8 flex items-center justify-center gap-4 sm:mt-10">
+            <a href="#work" className="shimmer glow-pulse rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground sm:px-8 sm:py-4">
               Explore Our Work
             </a>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+        <div className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:block">
           <div className="mb-2 h-10 w-px animate-pulse bg-gradient-to-b from-transparent via-foreground/40 to-transparent" />
           Scroll
         </div>
@@ -164,8 +262,29 @@ function Index() {
 
       <WaveDivider />
 
-      {/* HORIZONTAL FEATURES */}
-      <section ref={horizontalRef} id="about" className="relative h-screen overflow-hidden">
+      {/* CAPABILITIES */}
+      <section id="capabilities" className="scroll-mt-28">
+      <div className="py-20 md:hidden">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="text-xs uppercase tracking-[0.3em] text-accent">/ Capabilities</div>
+          <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-5xl">
+            Built with <span className="text-gradient">obsessive</span> craft.
+          </h2>
+          <p className="mt-6 max-w-md text-muted-foreground">
+            Four disciplines, one studio. We blend strategy, design, motion, and engineering into singular digital products.
+          </p>
+          <div className="mt-10 flex flex-col gap-6">
+            {CAPABILITIES.map((c) => (
+              <TiltCard key={c.n} className="capability-card-mobile group">
+                <CapabilityCard c={c} />
+              </TiltCard>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CAPABILITIES — desktop: horizontal scroll */}
+      <section ref={horizontalRef} className="relative hidden h-screen overflow-hidden md:block" aria-label="Capabilities gallery">
         <div ref={trackRef} className="absolute left-0 top-0 flex h-full items-center gap-8 pl-[10vw]">
           <div className="w-[40vw] shrink-0">
             <div className="text-xs uppercase tracking-[0.3em] text-accent">/ Capabilities</div>
@@ -176,59 +295,102 @@ function Index() {
               Four disciplines, one studio. We blend strategy, design, motion, and engineering into singular digital products.
             </p>
           </div>
-          {[
-            {
-              t: "3D & WebGL",
-              d: "Real-time graphics, generative geometry, and immersive scenes built on Three.js & WebGPU.",
-              n: "01",
-              icon: Boxes,
-              img: "https://images.unsplash.com/photo-1633419461186-7d40a38105ec?auto=format&fit=crop&w=1200&q=80",
-            },
-            {
-              t: "Motion Systems",
-              d: "Choreographed timelines, scroll narratives, and micro-interactions tuned to 60fps perfection.",
-              n: "02",
-              icon: Sparkles,
-              img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80",
-            },
-            {
-              t: "Brand Identity",
-              d: "Typographic systems, kinetic logos, and editorial design that scales across surfaces.",
-              n: "03",
-              icon: Palette,
-              img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80",
-            },
-            {
-              t: "Product Engineering",
-              d: "Performant React applications, design systems, and infrastructure for ambitious teams.",
-              n: "04",
-              icon: Package,
-              img: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
-            },
-          ].map((c) => (
-            <TiltCard key={c.n} className="w-[28vw] shrink-0">
-              <div className="glass relative h-[60vh] rounded-3xl p-8">
-                <img
-                  src={c.img}
-                  alt={`${c.t} capability visual`}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full rounded-3xl object-cover opacity-40 transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-black/20 via-black/50 to-black/85" />
-                <div className="font-mono text-xs text-accent">{c.n} / 04</div>
-                <div className="mt-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-black/30 text-accent backdrop-blur">
-                  <c.icon size={24} />
-                </div>
-                <div className="absolute inset-x-8 bottom-8 z-10">
-                  <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/30 to-transparent" />
-                  <h3 className="mt-6 text-3xl font-semibold">{c.t}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground">{c.d}</p>
-                </div>
-                <div className="absolute right-8 top-8 h-16 w-16 rounded-full bg-gradient-primary opacity-30 blur-2xl" />
-              </div>
+          {CAPABILITIES.map((c) => (
+            <TiltCard key={c.n} className="group w-[28vw] shrink-0">
+              <CapabilityCard c={c} />
             </TiltCard>
           ))}
           <div className="w-[10vw] shrink-0" />
+        </div>
+      </section>
+      </section>
+
+      <WaveDivider flip />
+
+      {/* SERVICES */}
+      <section id="services" className="relative scroll-mt-28 py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="text-xs uppercase tracking-[0.3em] text-accent">/ Services</div>
+          <h2 className="mt-4 text-3xl font-bold sm:text-5xl md:text-7xl">
+            What we <span className="text-gradient">build.</span>
+          </h2>
+          <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
+            End-to-end product teams for founders, enterprises and ambitious brands across India and the world.
+          </p>
+
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {[
+              { t: "Web Development", d: "Lightning-fast websites and web apps in React, Next.js and TypeScript.", icon: Globe },
+              { t: "Mobile Apps", d: "Native-feel iOS and Android products built in Flutter and React Native.", icon: Smartphone },
+              { t: "SaaS Platforms", d: "Multi-tenant dashboards, billing, auth and analytics built for scale.", icon: Boxes },
+              { t: "UI / UX Design", d: "Brand-led product design and motion systems that turn visitors into customers.", icon: Palette },
+              { t: "AI Integrations", d: "Embed LLMs, RAG and AI agents into your product securely and reliably.", icon: Sparkles },
+              { t: "Cloud & DevOps", d: "CI/CD pipelines, AWS/GCP infrastructure and observability for dependable releases.", icon: Cloud },
+            ].map((s, i) => (
+              <TiltCard key={s.t} className="fade-up h-full" glare={false}>
+                <div className="glass group relative h-full rounded-3xl border border-white/10 bg-card/80 p-8 transition-all duration-300 hover:border-accent/50 hover:shadow-[0_0_40px_rgba(0,191,255,0.15)]">
+                  <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-[rgba(0,191,255,0.06)] via-transparent to-[rgba(107,92,255,0.06)]" />
+                  <div className="relative z-[1]">
+                    <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-black/40 text-accent backdrop-blur">
+                      <s.icon size={22} />
+                    </div>
+                    <div className="mb-2 font-mono text-xs text-accent">0{i + 1}</div>
+                    <h3 className="text-2xl font-semibold text-foreground sm:text-3xl">{s.t}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{s.d}</p>
+                  </div>
+                </div>
+              </TiltCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section id="about" className="relative scroll-mt-28 py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="text-xs uppercase tracking-[0.3em] text-accent">/ Process</div>
+          <h2 className="mt-4 text-3xl font-bold sm:text-5xl md:text-7xl">
+            How we <span className="text-gradient">build.</span>
+          </h2>
+
+          <div className="relative mt-14">
+            <svg viewBox="0 0 1200 120" className="absolute left-0 top-5 hidden w-full md:block">
+              <path
+                className="process-line-path"
+                d="M20 60 C 260 60, 260 60, 500 60 C 740 60, 740 60, 980 60"
+                fill="none"
+                stroke="url(#processLine)"
+                strokeWidth="2"
+                strokeDasharray="1000"
+                strokeDashoffset="1000"
+              />
+              <defs>
+                <linearGradient id="processLine" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="rgba(0,191,255,0.3)" />
+                  <stop offset="50%" stopColor="rgba(107,92,255,0.8)" />
+                  <stop offset="100%" stopColor="rgba(0,191,255,0.3)" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { n: "01", t: "Discover", d: "Workshops, audits and roadmap.", icon: Search },
+                { n: "02", t: "Design", d: "Brand, UX and motion prototypes.", icon: Sparkles },
+                { n: "03", t: "Build", d: "Engineering with daily demos.", icon: Cog },
+                { n: "04", t: "Launch", d: "Ship, measure and iterate.", icon: Rocket },
+              ].map((step) => (
+                <div key={step.n} className="process-step">
+                  <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-black/40 text-accent shadow-[0_0_28px_rgba(0,191,255,0.18)]">
+                    <step.icon size={24} />
+                  </div>
+                  <div className="font-mono text-xs text-accent">{step.n}</div>
+                  <h3 className="mt-2 text-2xl font-semibold sm:text-4xl">{step.t}</h3>
+                  <p className="mt-2 text-base text-muted-foreground">{step.d}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -258,7 +420,7 @@ function Index() {
       </section>
 
       {/* SHOWCASE GRID */}
-      <section id="work" className="relative scroll-mt-28 py-32">
+      <section id="work" className="relative scroll-mt-28 py-20 sm:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="fade-up flex items-end justify-between">
             <div>
@@ -427,7 +589,7 @@ function Index() {
       <WaveDivider />
 
       {/* CTA */}
-      <section id="contact" className="relative overflow-hidden py-32">
+      <section id="contact" className="relative scroll-mt-28 overflow-hidden py-32">
         <FloatingParticles />
         <div className="absolute inset-0 bg-gradient-primary opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
