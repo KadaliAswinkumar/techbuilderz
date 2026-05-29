@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogHowWeBuiltCloudCostOptimizerSaasRouteImport } from './routes/blog/how-we-built-cloud-cost-optimizer-saas'
 
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   id: '/terms-and-conditions',
@@ -28,35 +30,70 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogHowWeBuiltCloudCostOptimizerSaasRoute =
+  BlogHowWeBuiltCloudCostOptimizerSaasRouteImport.update({
+    id: '/blog/how-we-built-cloud-cost-optimizer-saas',
+    path: '/blog/how-we-built-cloud-cost-optimizer-saas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/blog/how-we-built-cloud-cost-optimizer-saas': typeof BlogHowWeBuiltCloudCostOptimizerSaasRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/blog/how-we-built-cloud-cost-optimizer-saas': typeof BlogHowWeBuiltCloudCostOptimizerSaasRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/blog/how-we-built-cloud-cost-optimizer-saas': typeof BlogHowWeBuiltCloudCostOptimizerSaasRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/privacy-policy' | '/terms-and-conditions'
+  fullPaths:
+    | '/'
+    | '/privacy-policy'
+    | '/terms-and-conditions'
+    | '/blog/how-we-built-cloud-cost-optimizer-saas'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/privacy-policy' | '/terms-and-conditions'
-  id: '__root__' | '/' | '/privacy-policy' | '/terms-and-conditions'
+  to:
+    | '/'
+    | '/privacy-policy'
+    | '/terms-and-conditions'
+    | '/blog/how-we-built-cloud-cost-optimizer-saas'
+    | '/blog'
+  id:
+    | '__root__'
+    | '/'
+    | '/privacy-policy'
+    | '/terms-and-conditions'
+    | '/blog/how-we-built-cloud-cost-optimizer-saas'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
+  BlogHowWeBuiltCloudCostOptimizerSaasRoute: typeof BlogHowWeBuiltCloudCostOptimizerSaasRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +119,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-we-built-cloud-cost-optimizer-saas': {
+      id: '/blog/how-we-built-cloud-cost-optimizer-saas'
+      path: '/blog/how-we-built-cloud-cost-optimizer-saas'
+      fullPath: '/blog/how-we-built-cloud-cost-optimizer-saas'
+      preLoaderRoute: typeof BlogHowWeBuiltCloudCostOptimizerSaasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +140,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
+  BlogHowWeBuiltCloudCostOptimizerSaasRoute:
+    BlogHowWeBuiltCloudCostOptimizerSaasRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

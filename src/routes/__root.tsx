@@ -72,14 +72,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      {
+        title:
+          "TechBuilderz - Web Development, Mobile Apps & AI Integration Studio | India",
+      },
+      {
+        name: "description",
+        content:
+          "TechBuilderz is an Indian digital studio building high-performance websites, mobile apps, SaaS platforms, and AI-powered products. We serve startups and enterprises across India and globally.",
+      },
+      {
+        name: "keywords",
+        content:
+          "TechBuilderz, techbuilderz.in, web development India, mobile app development India, SaaS development, AI integration, React developer India, Next.js agency, Flutter app development, startup tech partner India",
+      },
+      { name: "author", content: "TechBuilderz" },
+      { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: "#000000" },
+      { property: "og:site_name", content: "TechBuilderz" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:locale", content: "en_IN" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@techbuilderz" },
+      { name: "twitter:creator", content: "@techbuilderz" },
+      { name: "geo.region", content: "IN" },
+      { name: "geo.placename", content: "India" },
     ],
     links: [
       {

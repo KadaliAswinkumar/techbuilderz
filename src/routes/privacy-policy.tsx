@@ -48,7 +48,9 @@ export const Route = createFileRoute("/privacy-policy")({
     meta: [
       { title: "Privacy Policy - TecH BuilderZ" },
       { name: "description", content: "Privacy Policy for TecH BuilderZ." },
+      { name: "robots", content: "noindex, follow" },
     ],
+    links: [{ rel: "canonical", href: "https://techbuilderz.in/privacy-policy" }],
   }),
   component: PrivacyPolicyPage,
 });

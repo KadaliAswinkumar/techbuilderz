@@ -46,7 +46,9 @@ export const Route = createFileRoute("/terms-and-conditions")({
     meta: [
       { title: "Terms and Conditions - TecH BuilderZ" },
       { name: "description", content: "Terms and Conditions for TecH BuilderZ." },
+      { name: "robots", content: "noindex, follow" },
     ],
+    links: [{ rel: "canonical", href: "https://techbuilderz.in/terms-and-conditions" }],
   }),
   component: TermsAndConditionsPage,
 });

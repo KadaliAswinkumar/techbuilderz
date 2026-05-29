@@ -30,13 +30,73 @@ import { TiltCard } from "@/components/sites/TiltCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const SITE_URL = "https://techbuilderz.in";
+const OG_IMAGE_URL = `${SITE_URL}/og-image.svg`;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TecH BuilderZ — Immersive Digital Experiences" },
-      { name: "description", content: "Award-winning creative studio crafting next-generation 3D web experiences, motion design, and futuristic interfaces." },
-      { property: "og:title", content: "TecH BuilderZ — Immersive Digital Experiences" },
-      { property: "og:description", content: "Award-winning creative studio crafting next-generation 3D web experiences." },
+      {
+        title:
+          "TechBuilderz - Web Development, Mobile Apps & AI Integration Studio | India",
+      },
+      {
+        name: "description",
+        content:
+          "TechBuilderz is an Indian digital studio building high-performance websites, mobile apps, SaaS platforms, and AI-powered products. We serve startups and enterprises across India and globally.",
+      },
+      {
+        property: "og:title",
+        content: "TechBuilderz - Immersive Web, Mobile & AI Studio",
+      },
+      {
+        property: "og:description",
+        content:
+          "We design and engineer immersive digital experiences - websites, apps, SaaS platforms and AI products for ambitious founders across India.",
+      },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        name: "twitter:title",
+        content: "TechBuilderz - Web, Mobile & AI Studio",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Building next-gen digital products for ambitious startups and enterprises in India.",
+      },
+      { name: "twitter:image", content: OG_IMAGE_URL },
+    ],
+    links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "TechBuilderz",
+          alternateName: "TecH BuilderZ",
+          url: SITE_URL,
+          logo: `${SITE_URL}/branding/techbuilderz-logo.svg`,
+          foundingDate: "2026",
+          description:
+            "Indian creative studio building immersive websites, mobile apps, SaaS platforms and AI integrations.",
+          areaServed: ["India", "Global"],
+          email: "team@techbuilderz.in",
+          telephone: "+91-9398431573",
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+91-9398431573",
+            contactType: "Customer Service",
+            availableLanguage: ["English", "Hindi"],
+          },
+          sameAs: ["https://www.linkedin.com/company/tech-builderz/"],
+        }),
+      },
     ],
   }),
   component: Index,
@@ -155,7 +215,7 @@ function Index() {
         start: "top 70%",
         once: true,
         onEnter: () => {
-          const targets = [12, 2, 4, 12];
+          const targets = [12, 2, 4, 100];
           targets.forEach((target, i) => {
             const obj = { v: 0 };
             gsap.to(obj, {
@@ -408,7 +468,7 @@ function Index() {
               { v: counts[0], s: "", l: "Projects shipped" },
               { v: counts[1], s: "", l: "Awards won" },
               { v: counts[2], s: "", l: "Industries served" },
-              { v: counts[3], s: "", l: "Client retention" },
+              { v: counts[3], s: "%", l: "Client retention" },
             ].map((s, i) => (
               <div key={i} className="fade-up glass rounded-2xl p-8">
                 <div className="text-5xl font-bold text-gradient md:text-6xl">{i === 1 ? String(s.v).padStart(2, "0") : s.v}{s.s}</div>
@@ -519,7 +579,7 @@ function Index() {
                         <div className="mt-1 text-2xl font-semibold">{p.t}</div>
                       </div>
                       <span className="rounded-full glass px-3 py-1 text-[10px] uppercase tracking-wider text-muted-foreground">
-                        Coming Soon
+                        Beta · Q4 2026
                       </span>
                     </div>
                   </div>
@@ -623,9 +683,15 @@ function Index() {
       <footer className="relative border-t border-border/50 py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-6 md:flex-row md:items-center">
           <div className="text-sm text-muted-foreground">
-            © 2026 TecH BuilderZ. Designed in motion.
+            © 2026 TecH BuilderZ, Hyderabad, India. Designed in motion.
           </div>
           <div className="flex flex-wrap items-center gap-3 text-sm">
+            <a
+              href="/blog"
+              className="shimmer glass rounded-full px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Blog
+            </a>
             <a
               href="/privacy-policy"
               className="shimmer glass rounded-full px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
