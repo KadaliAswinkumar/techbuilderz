@@ -27,6 +27,7 @@ import { Loader } from "@/components/sites/Loader";
 import { Nav } from "@/components/sites/Nav";
 import { WaveDivider } from "@/components/sites/WaveDivider";
 import { TiltCard } from "@/components/sites/TiltCard";
+import { PricingSection } from "@/components/sites/PricingSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -591,7 +592,7 @@ function Index() {
       </section>
 
       {/* TESTIMONIALS MARQUEE */}
-      <section className="relative py-32">
+      <section id="praise" className="relative scroll-mt-28 py-32">
         <div className="mx-auto mb-12 max-w-6xl px-6">
           <div className="fade-up text-xs uppercase tracking-[0.3em] text-accent">/ Praise</div>
           <h2 className="fade-up mt-4 text-5xl font-bold md:text-6xl">Words from <span className="text-gradient">collaborators</span>.</h2>
@@ -645,6 +646,10 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <WaveDivider flip />
+
+      <PricingSection />
 
       <WaveDivider />
 

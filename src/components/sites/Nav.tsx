@@ -5,6 +5,7 @@ const NAV_LINKS = [
   { label: "Services", id: "services" },
   { label: "About", id: "about" },
   { label: "Work", id: "work" },
+  { label: "Pricing", id: "pricing" },
   { label: "Contact", id: "contact" },
 ] as const;
 
