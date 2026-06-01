@@ -28,6 +28,8 @@ import { Nav } from "@/components/sites/Nav";
 import { WaveDivider } from "@/components/sites/WaveDivider";
 import { TiltCard } from "@/components/sites/TiltCard";
 import { PricingSection } from "@/components/sites/PricingSection";
+import { EXPEDITIONS } from "@/data/expeditions";
+import { ExpeditionViewAllCard } from "@/components/sites/ExpeditionViewAllCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -491,49 +493,8 @@ function Index() {
             <a href="#contact" className="hidden text-sm text-muted-foreground underline-offset-4 hover:underline md:block">Start your project →</a>
           </div>
           <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {[
-              {
-                t: "Cloud Cost Optimiser",
-                c: "FinOps · SaaS",
-                h: "h-[340px]",
-                g: "from-[#6b5cff] to-[#00e5ff]",
-                img: "https://picsum.photos/id/180/1400/900",
-                url: "https://kadaliaswinkumar.github.io/cloudcost-optimizer/compare",
-              },
-              {
-                t: "Agent Forge",
-                c: "AI Agent Platform",
-                h: "h-[340px]",
-                g: "from-[#ff5cb1] to-[#6b5cff]",
-                img: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=1400&q=80",
-                url: "https://kadaliaswinkumar.github.io/AgentForge/",
-              },
-              {
-                t: "TecH BuilderZ",
-                c: "SaaS Product Website Agency",
-                h: "h-[340px]",
-                g: "from-[#00e5ff] to-[#6bff9e]",
-                img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
-                url: "https://techbuilderz.in/",
-              },
-              {
-                t: "Emily",
-                c: "AI Companion",
-                h: "h-[340px]",
-                g: "from-[#ffae00] to-[#ff5cb1]",
-                img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1400&q=80",
-                url: null,
-              },
-              {
-                t: "Portfolio",
-                c: "Personal Website for People",
-                h: "h-[340px]",
-                g: "from-[#6b5cff] to-[#ff5cb1]",
-                img: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1400&q=80",
-                url: "https://kadaliaswinkumar.github.io/kadaliaswinkumar.in/",
-              },
-            ].map((p, i) => (
-              <TiltCard key={i} className={`fade-up group ${p.h}`}>
+            {EXPEDITIONS.map((p, i) => (
+              <TiltCard key={p.t} className={`fade-up group ${p.h}`}>
                 {p.url ? (
                   <a
                     href={p.url}
@@ -587,6 +548,7 @@ function Index() {
                 )}
               </TiltCard>
             ))}
+            <ExpeditionViewAllCard />
           </div>
         </div>
       </section>
