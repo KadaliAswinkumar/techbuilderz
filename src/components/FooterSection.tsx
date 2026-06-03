@@ -221,7 +221,7 @@ export default function FooterSection() {
             fontFamily: "var(--font-space), sans-serif",
           }}
         >
-          Designed in motion.
+          Designed with Passion
         </span>
         <span
           className="md:text-right"
@@ -231,7 +231,7 @@ export default function FooterSection() {
             fontFamily: "var(--font-space), sans-serif",
           }}
         >
-          Built with WebGL · Crafted in Hyderabad
+          Crafted in Hyderabad
         </span>
       </div>
 
