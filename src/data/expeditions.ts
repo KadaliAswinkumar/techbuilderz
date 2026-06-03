@@ -34,6 +34,14 @@ export const EXPEDITIONS: Expedition[] = [
     url: "https://techbuilderz.in/",
   },
   {
+    t: "FORMA Studio",
+    c: "Architecture · Interiors",
+    h: "h-[340px]",
+    g: "from-[#6b5cff] to-[#00e5ff]",
+    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80",
+    url: "https://techbuilderz.github.io/forma-studio/",
+  },
+  {
     t: "Drip Gen Z",
     c: "Cafe · Modern Coffee Bar",
     h: "h-[340px]",
