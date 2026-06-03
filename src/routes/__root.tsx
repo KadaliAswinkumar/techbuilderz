@@ -9,24 +9,30 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { LoaderProvider } from "@/lib/LoaderContext";
+import SmoothScroll from "@/components/SmoothScroll";
+import CustomCursor from "@/components/CustomCursor";
+import PageLoader from "@/components/PageLoader";
+
+const FONTS_URL =
+  "https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div
+      className="flex min-h-screen items-center justify-center px-4"
+      style={{ background: "var(--bg)", color: "var(--fg)" }}
+    >
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+        <h1 className="font-display" style={{ fontSize: "clamp(80px, 20vw, 160px)" }}>
+          404
+        </h1>
+        <p className="mt-4" style={{ color: "var(--fg-muted)" }}>
+          The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+        <Link to="/" className="btn-brut mt-8 inline-flex">
+          Go home
+        </Link>
       </div>
     </div>
   );
@@ -37,28 +43,27 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div
+      className="flex min-h-screen items-center justify-center px-4"
+      style={{ background: "var(--bg)", color: "var(--fg)" }}
+    >
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <h1 className="font-display text-2xl">This page didn&apos;t load</h1>
+        <p className="mt-2" style={{ color: "var(--fg-muted)" }}>
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <button
+            type="button"
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn-brut"
           >
             Try again
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
+          <a href="/" className="btn-brut btn-brut-ghost">
             Go home
           </a>
         </div>
@@ -73,41 +78,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        title:
-          "TechBuilderz - Web Development, Mobile Apps & AI Integration Studio | India",
+        title: "TecH BuilderZ — Beyond the Interface. Crafting Tomorrow.",
       },
       {
         name: "description",
         content:
-          "TechBuilderz is an Indian digital studio building high-performance websites, mobile apps, SaaS platforms, and AI-powered products. We serve startups and enterprises across India and globally.",
-      },
-      {
-        name: "keywords",
-        content:
-          "TechBuilderz, techbuilderz.in, web development India, mobile app development India, SaaS development, AI integration, React developer India, Next.js agency, Flutter app development, startup tech partner India",
+          "We design and engineer immersive digital experiences at the intersection of 3D, motion, and storytelling. Creative studio based in Hyderabad, India.",
       },
       { name: "author", content: "TechBuilderz" },
       { name: "robots", content: "index, follow" },
-      { name: "theme-color", content: "#000000" },
+      { name: "theme-color", content: "#0a0a0a" },
       { property: "og:site_name", content: "TechBuilderz" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_IN" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@techbuilderz" },
-      { name: "twitter:creator", content: "@techbuilderz" },
-      { name: "geo.region", content: "IN" },
-      { name: "geo.placename", content: "India" },
     ],
     links: [
-      {
-        rel: "icon",
-        type: "image/svg+xml",
-        href: "/favicon.svg",
-      },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "stylesheet", href: FONTS_URL },
+      { rel: "stylesheet", href: appCss },
     ],
   }),
   shellComponent: RootShell,
@@ -118,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="antialiased">
       <head>
         <HeadContent />
       </head>
@@ -135,7 +123,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <LoaderProvider>
+        <SmoothScroll />
+        <CustomCursor />
+        <PageLoader />
+        <div className="grain" aria-hidden />
+        <Outlet />
+      </LoaderProvider>
     </QueryClientProvider>
   );
 }

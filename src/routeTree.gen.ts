@@ -9,109 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as BlogIndexRouteImport } from './routes/blog/index'
-import { Route as BlogHowWeBuiltCloudCostOptimizerSaasRouteImport } from './routes/blog/how-we-built-cloud-cost-optimizer-saas'
 
-const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
-  id: '/terms-and-conditions',
-  path: '/terms-and-conditions',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogIndexRoute = BlogIndexRouteImport.update({
-  id: '/blog/',
-  path: '/blog/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogHowWeBuiltCloudCostOptimizerSaasRoute =
-  BlogHowWeBuiltCloudCostOptimizerSaasRouteImport.update({
-    id: '/blog/how-we-built-cloud-cost-optimizer-saas',
-    path: '/blog/how-we-built-cloud-cost-optimizer-saas',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
-  '/terms-and-conditions': typeof TermsAndConditionsRoute
-  '/blog/how-we-built-cloud-cost-optimizer-saas': typeof BlogHowWeBuiltCloudCostOptimizerSaasRoute
-  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
-  '/terms-and-conditions': typeof TermsAndConditionsRoute
-  '/blog/how-we-built-cloud-cost-optimizer-saas': typeof BlogHowWeBuiltCloudCostOptimizerSaasRoute
-  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
-  '/terms-and-conditions': typeof TermsAndConditionsRoute
-  '/blog/how-we-built-cloud-cost-optimizer-saas': typeof BlogHowWeBuiltCloudCostOptimizerSaasRoute
-  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/privacy-policy'
-    | '/terms-and-conditions'
-    | '/blog/how-we-built-cloud-cost-optimizer-saas'
-    | '/blog/'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/privacy-policy'
-    | '/terms-and-conditions'
-    | '/blog/how-we-built-cloud-cost-optimizer-saas'
-    | '/blog'
-  id:
-    | '__root__'
-    | '/'
-    | '/privacy-policy'
-    | '/terms-and-conditions'
-    | '/blog/how-we-built-cloud-cost-optimizer-saas'
-    | '/blog/'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
-  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
-  BlogHowWeBuiltCloudCostOptimizerSaasRoute: typeof BlogHowWeBuiltCloudCostOptimizerSaasRoute
-  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/terms-and-conditions': {
-      id: '/terms-and-conditions'
-      path: '/terms-and-conditions'
-      fullPath: '/terms-and-conditions'
-      preLoaderRoute: typeof TermsAndConditionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -119,30 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog/': {
-      id: '/blog/'
-      path: '/blog'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog/how-we-built-cloud-cost-optimizer-saas': {
-      id: '/blog/how-we-built-cloud-cost-optimizer-saas'
-      path: '/blog/how-we-built-cloud-cost-optimizer-saas'
-      fullPath: '/blog/how-we-built-cloud-cost-optimizer-saas'
-      preLoaderRoute: typeof BlogHowWeBuiltCloudCostOptimizerSaasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PrivacyPolicyRoute: PrivacyPolicyRoute,
-  TermsAndConditionsRoute: TermsAndConditionsRoute,
-  BlogHowWeBuiltCloudCostOptimizerSaasRoute:
-    BlogHowWeBuiltCloudCostOptimizerSaasRoute,
-  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
