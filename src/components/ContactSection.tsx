@@ -1,8 +1,9 @@
 
 import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { MeshDistortMaterial, Float, Environment } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { MeshDistortMaterial, Float } from "@react-three/drei";
 import * as THREE from "three";
+import { SceneEnvironment, ThreeCanvas } from "@/components/ThreeCanvas";
 
 // ─────────────────────────────────────────────────────────────────
 // EMAIL CONFIG
@@ -34,10 +35,10 @@ function MiniBlob() {
       <mesh ref={ref}>
         <icosahedronGeometry args={[1.0, 1]} />
         <MeshDistortMaterial
-          color="#1a1a1a"
-          metalness={1}
-          roughness={0.18}
-          envMapIntensity={1.4}
+          color="#2e2e2e"
+          metalness={0.95}
+          roughness={0.12}
+          envMapIntensity={2.2}
           distort={0.4}
           speed={2}
         />
@@ -411,18 +412,18 @@ export default function ContactSection() {
           </div>
 
           {/* 3D canvas */}
-          <div className="mt-10 relative w-full h-[260px] md:h-[320px]">
-            <Canvas
+          <div className="mt-10 relative h-[260px] w-full md:h-[320px]">
+            <ThreeCanvas
               camera={{ position: [0, 0, 3.2], fov: 38 }}
               gl={{ antialias: true, alpha: true }}
               dpr={[1, 2]}
             >
-              <ambientLight intensity={0.3} />
-              <pointLight position={[-3, 2, 2]} intensity={1.2} color="#ff5b1a" />
-              <pointLight position={[3, -2, 2]} intensity={0.8} color="#4cb8ff" />
-              <Environment preset="city" />
+              <ambientLight intensity={0.45} />
+              <pointLight position={[-3, 2, 2]} intensity={1.4} color="#ff5b1a" />
+              <pointLight position={[3, -2, 2]} intensity={1.0} color="#4cb8ff" />
+              <SceneEnvironment />
               <MiniBlob />
-            </Canvas>
+            </ThreeCanvas>
           </div>
         </div>
 

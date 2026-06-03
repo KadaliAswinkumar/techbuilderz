@@ -1,10 +1,11 @@
 
 import { useEffect, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, MeshDistortMaterial, Float } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { MeshDistortMaterial, Float } from "@react-three/drei";
 import * as THREE from "three";
 import { motion } from "framer-motion";
 import { useLoader } from "@/lib/LoaderContext";
+import { SceneEnvironment, ThreeCanvas } from "@/components/ThreeCanvas";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -31,10 +32,10 @@ function ChromeBlob({
       <mesh ref={ref}>
         <sphereGeometry args={[1.5, 196, 196]} />
         <MeshDistortMaterial
-          color="#1a1a1a"
-          metalness={1}
-          roughness={0.18}
-          envMapIntensity={1.5}
+          color="#2e2e2e"
+          metalness={0.95}
+          roughness={0.12}
+          envMapIntensity={2.2}
           distort={0.48}
           speed={1.8}
         />
@@ -72,7 +73,7 @@ function OrbitingShard({
         metalness={0.8}
         roughness={0.2}
         emissive="#ff5b1a"
-        emissiveIntensity={0.2}
+        emissiveIntensity={0.45}
       />
     </mesh>
   );
@@ -106,22 +107,22 @@ export default function HeroSection() {
       style={{ background: "var(--bg)" }}
     >
       {/* Canvas backdrop */}
-      <div className="absolute inset-0 z-0">
-        <Canvas
+      <div className="absolute inset-0 z-0 min-h-[100svh] h-full w-full">
+        <ThreeCanvas
           camera={{ position: [0, 0, 5], fov: 42 }}
           gl={{ antialias: true, alpha: true }}
           dpr={[1, 2]}
         >
-          <ambientLight intensity={0.25} />
-          <directionalLight position={[5, 5, 5]} intensity={0.7} />
-          <pointLight position={[-4, 2, 3]} intensity={1.2} color="#ff5b1a" />
-          <pointLight position={[4, -2, 2]} intensity={0.8} color="#4cb8ff" />
-          <Environment preset="city" />
+          <ambientLight intensity={0.45} />
+          <directionalLight position={[5, 5, 5]} intensity={1.1} />
+          <pointLight position={[-4, 2, 3]} intensity={1.6} color="#ff5b1a" />
+          <pointLight position={[4, -2, 2]} intensity={1.0} color="#4cb8ff" />
+          <SceneEnvironment />
           <ChromeBlob mouse={mouse} />
-          <OrbitingShard radius={2.6} speed={0.4} size={0.18} yOffset={0.6} />
-          <OrbitingShard radius={2.9} speed={-0.3} size={0.13} yOffset={-0.4} />
-          <OrbitingShard radius={2.3} speed={0.6} size={0.1} yOffset={-1.0} />
-        </Canvas>
+          <OrbitingShard radius={2.6} speed={0.4} size={0.22} yOffset={0.6} />
+          <OrbitingShard radius={2.9} speed={-0.3} size={0.16} yOffset={-0.4} />
+          <OrbitingShard radius={2.3} speed={0.6} size={0.12} yOffset={-1.0} />
+        </ThreeCanvas>
       </div>
 
       {/* Vignette overlay */}
@@ -130,7 +131,7 @@ export default function HeroSection() {
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(10,10,10,0) 30%, rgba(10,10,10,0.7) 100%)",
+            "radial-gradient(ellipse at center, rgba(10,10,10,0) 40%, rgba(10,10,10,0.55) 100%)",
         }}
       />
 

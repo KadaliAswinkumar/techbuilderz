@@ -1,9 +1,10 @@
 
 import { useRef, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ThreeCanvas } from "@/components/ThreeCanvas";
 
 type Kind = "web" | "mobile" | "saas" | "design" | "ai" | "cloud";
 
@@ -443,17 +444,17 @@ function ServiceModel({ kind }: { kind: Kind }) {
 
 function ServiceCanvas({ kind }: { kind: Kind }) {
   return (
-    <Canvas
+    <ThreeCanvas
       camera={{ position: [0, 0.1, 2.7], fov: 38 }}
       gl={{ antialias: true, alpha: true }}
       dpr={[1, 2]}
     >
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[3, 3, 3]} intensity={1.0} />
-      <pointLight position={[-2, -1, 2]} intensity={0.7} color="#ff5b1a" />
-      <pointLight position={[2, 2, -2]} intensity={0.4} color="#4cb8ff" />
+      <ambientLight intensity={0.55} />
+      <directionalLight position={[3, 3, 3]} intensity={1.2} />
+      <pointLight position={[-2, -1, 2]} intensity={0.9} color="#ff5b1a" />
+      <pointLight position={[2, 2, -2]} intensity={0.6} color="#4cb8ff" />
       <ServiceModel kind={kind} />
-    </Canvas>
+    </ThreeCanvas>
   );
 }
 
@@ -597,7 +598,7 @@ export default function ServicesSection() {
               </div>
 
               <div
-                className="relative w-full h-[200px] md:h-full md:min-h-[200px] md:w-[220px]"
+                className="relative h-[220px] w-full shrink-0 md:h-[240px] md:w-[220px]"
                 style={{ background: "transparent" }}
               >
                 <ServiceCanvas kind={s.kind} />
