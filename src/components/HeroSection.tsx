@@ -5,6 +5,7 @@ import { MeshDistortMaterial, Float } from "@react-three/drei";
 import * as THREE from "three";
 import { motion } from "framer-motion";
 import { useLoader } from "@/lib/LoaderContext";
+import { HERO_STATS } from "@/lib/site-config";
 import { SceneEnvironment, ThreeCanvas } from "@/components/ThreeCanvas";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -261,18 +262,18 @@ export default function HeroSection() {
           transition={{ duration: 1.0, ease: EASE, delay: 1.3 }}
           className="mt-12 flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
-          <div className="flex items-center gap-8 md:gap-12">
-            {[
-              { n: "07", label: "Projects shipped" },
-              { n: "04", label: "Core disciplines" },
-              { n: "24h", label: "Reply window" },
-            ].map((s) => (
-              <div key={s.label} className="flex flex-col gap-1">
+          <div className="flex items-end gap-8 md:gap-12">
+            {HERO_STATS.map((s) => (
+              <div
+                key={s.label}
+                className="flex flex-col gap-2 min-w-[5.5rem] md:min-w-[6.5rem]"
+              >
                 <span
-                  className="font-display"
+                  className="font-display tabular-nums leading-none"
                   style={{
                     fontSize: "clamp(28px, 3vw, 44px)",
                     color: "var(--fg)",
+                    minHeight: "clamp(28px, 3vw, 44px)",
                   }}
                 >
                   {s.n}
@@ -284,6 +285,8 @@ export default function HeroSection() {
                     textTransform: "uppercase",
                     color: "var(--fg-muted)",
                     fontFamily: "var(--font-space), sans-serif",
+                    lineHeight: 1.4,
+                    minHeight: "2.8em",
                   }}
                 >
                   {s.label}

@@ -70,7 +70,7 @@ export default function ProcessSection() {
       className="relative w-full h-screen overflow-hidden"
       style={{ background: "var(--bg-2)" }}
     >
-      <div className="absolute top-0 left-0 right-0 z-10 px-6 md:px-12 pt-32">
+      <div className="absolute top-0 left-0 right-0 z-20 px-6 md:px-12 pt-28 pb-10 md:pb-14">
         <div className="flex items-end justify-between flex-wrap gap-4">
           <div>
             <p
@@ -85,7 +85,7 @@ export default function ProcessSection() {
               04 / Process
             </p>
             <h2
-              className="font-display text-[var(--fg)] mt-3"
+              className="font-display text-[var(--fg)] mt-4 mb-2"
               style={{ fontSize: "clamp(40px, 5vw, 72px)" }}
             >
               Four steps — <span className="font-editorial italic">no surprises.</span>
@@ -107,14 +107,18 @@ export default function ProcessSection() {
 
       <div
         ref={trackRef}
-        className="absolute inset-0 flex items-center will-change-transform"
-        style={{ width: `${steps.length * 100}vw` }}
+        className="absolute left-0 right-0 bottom-0 flex items-center will-change-transform"
+        style={{
+          width: `${steps.length * 100}vw`,
+          top: "11.5rem",
+        }}
       >
         {steps.map((s, i) => (
           <div
             key={s.n}
-            className="relative w-screen h-screen flex items-center px-6 md:px-24"
+            className="relative w-screen flex items-center px-6 md:px-24"
             style={{
+              height: "calc(100vh - 11.5rem)",
               borderLeft: i === 0 ? "none" : "1px solid var(--line)",
             }}
           >
@@ -122,19 +126,19 @@ export default function ProcessSection() {
               aria-hidden
               className="absolute font-display select-none pointer-events-none"
               style={{
-                fontSize: "min(60vh, 60vw)",
+                fontSize: "clamp(200px, 42vh, 520px)",
                 color: "var(--fg-muted)",
-                opacity: 0.06,
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
+                opacity: 0.055,
+                bottom: "8%",
+                right: "6%",
                 lineHeight: 0.8,
+                zIndex: 0,
               }}
             >
               {s.n}
             </span>
 
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 w-full max-w-6xl mx-auto">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 w-full max-w-6xl mx-auto pt-4 md:pt-8">
               <div>
                 <div className="flex items-center gap-4">
                   <span
@@ -157,7 +161,7 @@ export default function ProcessSection() {
                   </span>
                 </div>
                 <h3
-                  className="font-display mt-6 text-[var(--fg)]"
+                  className="font-display mt-6 text-[var(--fg)] relative z-[1]"
                   style={{
                     fontSize: "clamp(72px, 10vw, 180px)",
                     lineHeight: 0.9,

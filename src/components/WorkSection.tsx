@@ -21,7 +21,7 @@ const cases: Case[] = [
     client: "Cloud Cost Optimiser",
     type: "FinOps · SaaS Dashboard",
     href: "https://kadaliaswinkumar.github.io/cloudcost-optimizer/",
-    image: "https://picsum.photos/id/180/1600/1000",
+    image: "/work/cloud-cost-optimizer.jpg",
     gradient:
       "radial-gradient(circle at 30% 30%, #4cb8ff 0%, #1a3a5a 35%, #0a1a2a 80%, #0a0a0a 100%)",
     className: "md:col-span-8 md:h-[72vh] aspect-[4/5] md:aspect-auto",
@@ -32,8 +32,7 @@ const cases: Case[] = [
     client: "Agent Forge",
     type: "AI Agent Platform",
     href: "https://kadaliaswinkumar.github.io/AgentForge/",
-    image:
-      "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=1400&q=80",
+    image: "/work/agent-forge.jpg",
     gradient:
       "radial-gradient(circle at 60% 30%, #e8e0d8 0%, #5a5550 35%, #1a1612 80%, #0a0a0a 100%)",
     className: "md:col-span-4 md:h-[72vh] aspect-[3/4] md:aspect-auto",
@@ -43,8 +42,7 @@ const cases: Case[] = [
     client: "TecH BuilderZ",
     type: "SaaS · Agency Site",
     href: "https://techbuilderz.in/",
-    image:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
+    image: "/work/techbuilderz.jpg",
     gradient:
       "radial-gradient(circle at 40% 40%, #ff8a4a 0%, #b85320 35%, #2a1810 80%, #0a0a0a 100%)",
     className: "md:col-span-4 md:h-[42vh] aspect-[4/3] md:aspect-auto",
@@ -54,8 +52,7 @@ const cases: Case[] = [
     client: "Drip Gen Z",
     type: "Cafe · Modern Coffee Bar",
     href: "https://techbuilderz.github.io/Drip-Gen-Z/",
-    image:
-      "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1400&q=80",
+    image: "/work/drip-gen-z.jpg",
     gradient:
       "radial-gradient(circle at 50% 30%, #ff6b9d 0%, #7a2a4a 40%, #1a0a1a 85%, #0a0a0a 100%)",
     className: "md:col-span-4 md:h-[42vh] aspect-[4/3] md:aspect-auto",
@@ -65,8 +62,7 @@ const cases: Case[] = [
     client: "Retro Rewind Hub",
     type: "Cafe · Retro Coffee House",
     href: "https://techbuilderz.github.io/Retro-Rewind-Hub/",
-    image:
-      "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1400&q=80",
+    image: "/work/retro-rewind-hub.jpg",
     gradient:
       "radial-gradient(circle at 40% 50%, #d4a04a 0%, #6a4520 40%, #2a1a10 85%, #0a0a0a 100%)",
     className: "md:col-span-4 md:h-[42vh] aspect-[4/3] md:aspect-auto",
@@ -76,8 +72,7 @@ const cases: Case[] = [
     client: "Bloom Art Nouveau",
     type: "Cafe · Art Nouveau Lounge",
     href: "https://techbuilderz.github.io/Bloom-Art-Nouveau/",
-    image:
-      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1400&q=80",
+    image: "/work/bloom-art-nouveau.jpg",
     gradient:
       "radial-gradient(circle at 50% 40%, #8aa888 0%, #3a5a40 40%, #1a2a1a 85%, #0a0a0a 100%)",
     className: "md:col-span-6 md:h-[50vh] aspect-[16/10] md:aspect-auto",
@@ -87,8 +82,7 @@ const cases: Case[] = [
     client: "Forge Cafe",
     type: "Cafe · Artisan Roastery",
     href: "https://techbuilderz.github.io/Forge-Cafe/",
-    image:
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80",
+    image: "/work/forge-cafe.jpg",
     gradient:
       "radial-gradient(circle at 50% 50%, #c87a3a 0%, #6a3a20 40%, #2a1810 85%, #0a0a0a 100%)",
     className: "md:col-span-6 md:h-[50vh] aspect-[16/10] md:aspect-auto",
@@ -223,8 +217,13 @@ export default function WorkSection() {
                   objectPosition: "center",
                 }}
                 onError={(e) => {
-                  // Hide image if it fails — gradient remains visible
-                  (e.currentTarget as HTMLImageElement).style.display = "none";
+                  const img = e.currentTarget;
+                  if (!img.dataset.fallback && img.src.includes(".jpg")) {
+                    img.dataset.fallback = "1";
+                    img.src = img.src.replace(".jpg", ".svg");
+                    return;
+                  }
+                  img.style.display = "none";
                 }}
               />
 

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1f33"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#4cb8ff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#4cb8ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#glow)"/>
+  <rect x="120" y="100" width="1360" height="780" rx="8" fill="#141414" stroke="#4cb8ff" stroke-width="3"/>
+  <rect x="120" y="100" width="1360" height="52" fill="#0a0a0a"/>
+  <circle cx="156" cy="126" r="10" fill="#ff5b1a"/>
+  <circle cx="188" cy="126" r="10" fill="#f5f1ea" opacity="0.35"/>
+  <circle cx="220" cy="126" r="10" fill="#f5f1ea" opacity="0.35"/>
+  <rect x="200" y="200" width="520" height="36" rx="4" fill="#4cb8ff" opacity="0.85"/>
+  <rect x="200" y="260" width="720" height="18" rx="2" fill="#f5f1ea" opacity="0.25"/>
+  <rect x="200" y="300" width="640" height="18" rx="2" fill="#f5f1ea" opacity="0.18"/>
+  <rect x="200" y="380" width="400" height="280" rx="6" fill="#4cb8ff" opacity="0.2"/>
+  <rect x="640" y="380" width="760" height="280" rx="6" fill="#f5f1ea" opacity="0.08"/>
+  <rect x="200" y="700" width="280" height="120" rx="6" fill="#4cb8ff" opacity="0.35"/>
+  <rect x="520" y="700" width="280" height="120" rx="6" fill="#f5f1ea" opacity="0.1"/>
+  <rect x="840" y="700" width="560" height="120" rx="6" fill="#f5f1ea" opacity="0.08"/>
+  <text x="800" y="920" text-anchor="middle" fill="#f5f1ea" font-family="Impact, Arial Black, sans-serif" font-size="56" font-weight="900" letter-spacing="4">CLOUD COST</text>
+</svg>

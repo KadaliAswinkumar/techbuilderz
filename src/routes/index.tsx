@@ -9,30 +9,34 @@ import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
-
-const SITE_URL = "https://techbuilderz.in";
-const OG_IMAGE_URL = `${SITE_URL}/og-image.svg`;
+import SiteChatbot from "@/components/SiteChatbot";
+import {
+  OG_IMAGE_URL,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  TWITTER_SITE,
+} from "@/lib/seo-meta";
+import { SITE_URL } from "@/lib/site-config";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
       {
-        title: "TecH BuilderZ — Beyond the Interface. Crafting Tomorrow.",
+        property: "og:title",
+        content: "TechBuilderz - Web Development, Mobile Apps & AI Integration Studio",
       },
-      {
-        name: "description",
-        content:
-          "We design and engineer immersive digital experiences at the intersection of 3D, motion, and storytelling. Creative studio based in Hyderabad, India.",
-      },
-      { property: "og:title", content: "TecH BuilderZ — Beyond the Interface" },
-      {
-        property: "og:description",
-        content:
-          "We design and engineer immersive digital experiences at the intersection of 3D, motion, and storytelling.",
-      },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: TWITTER_SITE },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
@@ -56,6 +60,7 @@ function HomePage() {
       <TestimonialsSection />
       <ContactSection />
       <FooterSection />
+      <SiteChatbot />
     </main>
   );
 }

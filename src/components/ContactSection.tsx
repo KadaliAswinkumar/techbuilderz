@@ -5,23 +5,13 @@ import { MeshDistortMaterial, Float } from "@react-three/drei";
 import * as THREE from "three";
 import { SceneEnvironment, ThreeCanvas } from "@/components/ThreeCanvas";
 
-// ─────────────────────────────────────────────────────────────────
-// EMAIL CONFIG
-//
-// This form sends the user's brief straight to your inbox.
-//
-//  • Web3Forms (recommended): free 250 submissions/month, no backend.
-//    1. Go to https://web3forms.com → "Create your Access Key"
-//    2. Enter the email you want briefs delivered to (e.g. team@techbuilderz.in)
-//    3. Copy the access key shown
-//    4. Paste it below, replacing the placeholder.
-//
-//  • Until you paste a real key, the form falls back to mailto:
-//    (opens the user's email client with the brief pre-filled). It still works,
-//    just not as silently.
-// ─────────────────────────────────────────────────────────────────
-const WEB3FORMS_ACCESS_KEY = "REPLACE_WITH_YOUR_WEB3FORMS_KEY";
-const DESTINATION_EMAIL = "team@techbuilderz.in";
+import {
+  CONTACT_EMAIL,
+  WEB3FORMS_ACCESS_KEY,
+  WHATSAPP_LINK,
+} from "@/lib/site-config";
+
+const DESTINATION_EMAIL = CONTACT_EMAIL;
 
 function MiniBlob() {
   const ref = useRef<THREE.Mesh>(null);
@@ -195,7 +185,7 @@ export default function ContactSection() {
     setErrorMsg("");
 
     // Configured for real backgrounded send via Web3Forms
-    if (WEB3FORMS_ACCESS_KEY !== "REPLACE_WITH_YOUR_WEB3FORMS_KEY") {
+    if (WEB3FORMS_ACCESS_KEY) {
       try {
         const res = await fetch("https://api.web3forms.com/submit", {
           method: "POST",

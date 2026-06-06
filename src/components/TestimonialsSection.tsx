@@ -3,58 +3,61 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-type Quote = {
-  quote: string;
-  name: string;
-  role: string;
-  gradient: string;
-  span: string;
-};
-
-const quotes: Quote[] = [
+const quotes = [
   {
     quote:
-      "TecH BuilderZ understood our market quickly and gave us a polished product website in record time. It helped our sales team close demos faster.",
-    name: "Ananya Reddy",
-    role: "VP Product, CloudSutra",
-    gradient:
-      "radial-gradient(circle at 40% 30%, #4cb8ff 0%, #1a3a5a 50%, #0a0a0a 100%)",
+      "The team understood our product vision quickly and delivered a polished experience our leadership was proud to demo.",
+    name: "Rakesh Reddy Sir",
+    role: "Director · Enterprise Platforms",
+    gradient: "radial-gradient(circle at 40% 30%, #4cb8ff 0%, #1a3a5a 50%, #0a0a0a 100%)",
     span: "md:col-span-4",
   },
   {
     quote:
-      "From discovery to launch, communication was excellent. Every weekly update was clear, and the final design felt premium and modern.",
-    name: "Rohit Sharma",
-    role: "Founder, Agent Forge",
-    gradient:
-      "radial-gradient(circle at 60% 50%, #e8e0d8 0%, #5a5550 45%, #0a0a0a 100%)",
+      "Communication was disciplined and respectful throughout — weekly updates were clear and the final build felt premium.",
+    name: "K. Prasad Sir",
+    role: "Founder · Product Studio Client",
+    gradient: "radial-gradient(circle at 60% 50%, #e8e0d8 0%, #5a5550 45%, #0a0a0a 100%)",
     span: "md:col-span-4",
   },
   {
     quote:
-      "They simplified complex user journeys and improved conversion on our landing pages. We saw measurable growth within the first month.",
-    name: "Priya Nair",
-    role: "CMO, FinStack",
-    gradient:
-      "radial-gradient(circle at 30% 60%, #ff8a4a 0%, #6a2a14 45%, #0a0a0a 100%)",
+      "They simplified complex flows without dumbing down the brand. Our stakeholders noticed the difference immediately.",
+    name: "K. Satyanarayana Sir",
+    role: "Chief Technology Officer",
+    gradient: "radial-gradient(circle at 30% 60%, #ff8a4a 0%, #6a2a14 45%, #0a0a0a 100%)",
     span: "md:col-span-4",
   },
   {
     quote:
-      "The visual direction and frontend quality were both top-notch. The team was responsive, practical, and very easy to collaborate with.",
-    name: "Arjun Mehta",
-    role: "Head of Design, ScaleNest",
-    gradient:
-      "radial-gradient(circle at 50% 40%, #8aa888 0%, #3a5a40 45%, #0a0a0a 100%)",
+      "Reliable execution — no overpromising, just steady craft, motion, and engineering that matched the brief.",
+    name: "Baskar Rao Sir",
+    role: "Head of Product",
+    gradient: "radial-gradient(circle at 50% 40%, #8aa888 0%, #3a5a40 45%, #0a0a0a 100%)",
     span: "md:col-span-6",
   },
   {
     quote:
-      "What stood out most was reliability. No overpromises, just disciplined execution and great communication from start to finish.",
-    name: "Kavya Iyer",
-    role: "CTO, Emily AI",
-    gradient:
-      "radial-gradient(circle at 60% 50%, #ff6b9d 0%, #7a2a4a 45%, #0a0a0a 100%)",
+      "What stood out was professionalism end to end: discovery, design reviews, and a launch we could hand to operations.",
+    name: "Selvamani Iyer Sir",
+    role: "Operations Lead",
+    gradient: "radial-gradient(circle at 60% 50%, #ff6b9d 0%, #7a2a4a 45%, #0a0a0a 100%)",
+    span: "md:col-span-6",
+  },
+  {
+    quote:
+      "The visual direction and frontend quality were both excellent — responsive, fast, and aligned with our brand standards.",
+    name: "Manisha Rathore Ma'am",
+    role: "Design & Brand Lead",
+    gradient: "radial-gradient(circle at 40% 35%, #ffe9d6 0%, #6a5548 45%, #0a0a0a 100%)",
+    span: "md:col-span-6",
+  },
+  {
+    quote:
+      "We appreciated the straight answers on scope and timeline. The engagement felt like working with a serious product partner.",
+    name: "Keshav Reddy Sir",
+    role: "Founder · Technology Venture",
+    gradient: "radial-gradient(circle at 45% 50%, #c87a3a 0%, #4a3018 45%, #0a0a0a 100%)",
     span: "md:col-span-6",
   },
 ];
@@ -76,13 +79,13 @@ export default function TestimonialsSection() {
             opacity: 1,
             duration: 1.0,
             ease: "power3.out",
-            delay: (i % 3) * 0.12,
+            delay: (i % 3) * 0.1,
             scrollTrigger: {
               trigger: card,
               start: "top 88%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
     }, sectionRef);
@@ -138,7 +141,7 @@ export default function TestimonialsSection() {
             style={{
               background: "var(--bg)",
               border: "1px solid var(--line)",
-              minHeight: 360,
+              minHeight: 340,
             }}
           >
             <span
@@ -152,7 +155,6 @@ export default function TestimonialsSection() {
             >
               "
             </span>
-
             <blockquote
               className="font-editorial italic flex-1"
               style={{
@@ -164,7 +166,6 @@ export default function TestimonialsSection() {
             >
               {q.quote}
             </blockquote>
-
             <figcaption
               className="mt-8 pt-6 flex items-center gap-4"
               style={{ borderTop: "1px solid var(--line)" }}
@@ -181,7 +182,7 @@ export default function TestimonialsSection() {
                 <span
                   className="font-display"
                   style={{
-                    fontSize: 18,
+                    fontSize: 16,
                     letterSpacing: "0.04em",
                     color: "var(--fg)",
                   }}

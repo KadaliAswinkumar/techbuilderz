@@ -250,3 +250,19 @@ textarea {
   opacity: 0.18;
   transform: scale(1);
 }
+
+/* Chatbot message scroller */
+.chat-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg);
+}
+.chat-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: rgba(245, 241, 234, 0.06);
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 0;
+}

@@ -3,37 +3,46 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-type Card = {
-  num: string;
-  title: string;
-  body: string;
-  cta: string;
-  href: string;
-  highlight?: boolean;
-};
-
-const cards: Card[] = [
+const steps = [
   {
-    num: "P/01",
-    title: "Scope First",
-    body: "We map your features, user flows, integrations, and outcomes before sharing a commercial estimate. No surprise add-ons mid-build.",
-    cta: "Start a brief →",
+    num: "01",
+    title: "Discovery call",
+    body: "Free 20-minute session. We clarify goals, users, integrations, and success criteria. You leave with a written scope outline — no obligation.",
+    cta: "Book via contact →",
     href: "#contact",
   },
   {
-    num: "P/02",
-    title: "Effort Based",
-    body: "Pricing is calculated from implementation effort, design depth, technical complexity, and QA needs — never copy-pasted from a template.",
-    cta: "Discuss on WhatsApp →",
+    num: "02",
+    title: "Fixed proposal",
+    body: "Within 24 hours you receive a line-itemed quote: design, engineering, QA, and launch. One number, one timeline — no surprise add-ons mid-build.",
+    cta: "WhatsApp us →",
     href: "https://wa.me/919398431573",
     highlight: true,
   },
   {
-    num: "P/03",
-    title: "Custom Quote",
-    body: "Tell us what you're building. We reply within 24 hours with a clear, fixed proposal — line-itemed so you know exactly what each rupee buys.",
-    cta: "Request quote →",
+    num: "03",
+    title: "Build & launch",
+    body: "Milestone payments tied to demos. Weekly walkthroughs, staging from week one, and handover with documentation when the agreed scope is complete.",
+    cta: "Send a brief →",
     href: "#contact",
+  },
+] as const;
+
+const typical = [
+  {
+    type: "Marketing site + brand motion",
+    scope: "Positioning, UI, WebGL accents, responsive build",
+    timeline: "3–5 weeks",
+  },
+  {
+    type: "Product MVP (web)",
+    scope: "UX, design system, full-stack, auth & core flows",
+    timeline: "6–10 weeks",
+  },
+  {
+    type: "Mobile + backend",
+    scope: "Cross-platform app, API, release support",
+    timeline: "Custom (quoted)",
   },
 ];
 
@@ -60,7 +69,7 @@ export default function PricingSection() {
               start: "top 88%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
     }, sectionRef);
@@ -101,20 +110,20 @@ export default function PricingSection() {
           className="font-display text-[var(--fg)] mt-5"
           style={{ fontSize: "clamp(56px, 8vw, 140px)" }}
         >
-          Scope <span className="font-editorial italic">first.</span>
+          How it <span className="font-editorial italic">works.</span>
         </h2>
         <p
-          className="mt-6 max-w-xl"
+          className="mt-6 max-w-2xl"
           style={{ fontSize: 15, color: "var(--fg-muted)", lineHeight: 1.7 }}
         >
-          No off-the-shelf packages. We map the work, then send a fixed
-          line-itemed quote. You pay for value, not boilerplate.
+          No tiered packages to guess from. Every engagement follows the same
+          professional process — then a custom fixed quote shaped to your scope.
         </p>
         <div className="mt-8" style={{ height: 1, background: "var(--line)" }} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-        {cards.map((c, i) => (
+        {steps.map((c, i) => (
           <div
             key={c.num}
             ref={(el) => {
@@ -127,84 +136,36 @@ export default function PricingSection() {
               border: c.highlight
                 ? "1px solid var(--accent)"
                 : "1px solid var(--line)",
-              minHeight: 420,
+              minHeight: 400,
             }}
           >
-            {c.highlight && (
-              <span
-                className="absolute"
-                style={{
-                  top: -1,
-                  right: -1,
-                  background: "var(--bg)",
-                  color: "var(--accent)",
-                  padding: "0.4rem 0.7rem",
-                  fontFamily: "var(--font-space), sans-serif",
-                  fontSize: 10,
-                  letterSpacing: "0.28em",
-                  textTransform: "uppercase",
-                  fontWeight: 600,
-                }}
-              >
-                Preferred
-              </span>
-            )}
-
-            <div className="flex items-baseline justify-between">
-              <span
-                style={{
-                  fontFamily: "var(--font-space), sans-serif",
-                  fontSize: 11,
-                  letterSpacing: "0.32em",
-                  textTransform: "uppercase",
-                  opacity: 0.8,
-                }}
-              >
-                {c.num}
-              </span>
-              <span
-                style={{
-                  fontSize: 10,
-                  letterSpacing: "0.28em",
-                  textTransform: "uppercase",
-                  opacity: 0.7,
-                  fontFamily: "var(--font-space), sans-serif",
-                }}
-              >
-                ({i === 0 ? "stage" : i === 1 ? "principle" : "outcome"})
-              </span>
-            </div>
-
-            <h3
-              className="font-display mt-8"
+            <span
               style={{
-                fontSize: "clamp(40px, 4.5vw, 64px)",
-                lineHeight: 0.9,
-                letterSpacing: "0.02em",
+                fontFamily: "var(--font-space), sans-serif",
+                fontSize: 11,
+                letterSpacing: "0.32em",
+                textTransform: "uppercase",
+                opacity: 0.85,
               }}
+            >
+              Step {c.num}
+            </span>
+            <h3
+              className="font-display mt-6"
+              style={{ fontSize: "clamp(32px, 4vw, 52px)", lineHeight: 0.9 }}
             >
               {c.title.toUpperCase()}
             </h3>
-
-            <p
-              className="mt-8 flex-1"
-              style={{
-                fontSize: 15,
-                lineHeight: 1.7,
-                opacity: c.highlight ? 0.9 : 1,
-                color: c.highlight ? "var(--bg)" : "var(--fg)",
-              }}
-            >
+            <p className="mt-6 flex-1" style={{ fontSize: 15, lineHeight: 1.7 }}>
               {c.body}
             </p>
-
             <a
               href={c.href}
               {...(c.href.startsWith("http")
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
               data-hover
-              className={`mt-10 ${c.highlight ? "" : "btn-brut-ghost"} btn-brut`}
+              className={`mt-8 ${c.highlight ? "" : "btn-brut-ghost"} btn-brut`}
               style={{
                 background: c.highlight ? "var(--bg)" : undefined,
                 color: c.highlight ? "var(--fg)" : undefined,
@@ -214,6 +175,70 @@ export default function PricingSection() {
             </a>
           </div>
         ))}
+      </div>
+
+      <div className="mt-16 md:mt-20">
+        <p
+          style={{
+            fontFamily: "var(--font-space), sans-serif",
+            fontSize: 11,
+            letterSpacing: "0.32em",
+            textTransform: "uppercase",
+            color: "var(--accent)",
+          }}
+        >
+          Typical engagements (indicative)
+        </p>
+        <p
+          className="mt-3 max-w-xl text-sm"
+          style={{ color: "var(--fg-muted)", lineHeight: 1.6 }}
+        >
+          Ballpark timelines only — your quote depends on scope after discovery.
+        </p>
+        <div className="mt-8 overflow-x-auto">
+          <table
+            className="w-full min-w-[640px] text-left"
+            style={{
+              borderCollapse: "collapse",
+              fontFamily: "var(--font-space), sans-serif",
+              fontSize: 14,
+            }}
+          >
+            <thead>
+              <tr style={{ borderBottom: "1px solid var(--line)" }}>
+                {["Engagement", "Includes", "Timeline"].map((h) => (
+                  <th
+                    key={h}
+                    className="py-4 pr-6 font-medium"
+                    style={{
+                      color: "var(--fg-muted)",
+                      fontSize: 11,
+                      letterSpacing: "0.24em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {typical.map((row) => (
+                <tr key={row.type} style={{ borderBottom: "1px solid var(--line)" }}>
+                  <td className="py-5 pr-6 font-display" style={{ fontSize: 18 }}>
+                    {row.type.toUpperCase()}
+                  </td>
+                  <td className="py-5 pr-6" style={{ color: "var(--fg-muted)" }}>
+                    {row.scope}
+                  </td>
+                  <td className="py-5" style={{ color: "var(--accent)" }}>
+                    {row.timeline}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   );

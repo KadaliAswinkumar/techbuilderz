@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 
 const socials = [
   {
@@ -65,7 +66,7 @@ export default function FooterSection() {
               color: "var(--accent)",
             }}
           >
-            TecH BuilderZ
+            TechBuilderz
           </p>
           <p
             className="max-w-sm"
@@ -78,19 +79,37 @@ export default function FooterSection() {
             We design and engineer immersive digital experiences at the
             intersection of 3D, motion, and storytelling.
           </p>
-          <a
-            href="mailto:team@techbuilderz.in"
-            data-hover
-            className="link-underline"
+          <address
+            className="not-italic"
             style={{
               fontSize: 14,
-              color: "var(--fg)",
+              color: "var(--fg-muted)",
+              lineHeight: 1.8,
               fontFamily: "var(--font-space), sans-serif",
-              marginTop: 8,
             }}
           >
-            team@techbuilderz.in
-          </a>
+            TechBuilderz
+            <br />
+            Hyderabad, Telangana, India
+            <br />
+            <a
+              href="mailto:team@techbuilderz.in"
+              data-hover
+              className="link-underline"
+              style={{ color: "var(--fg)" }}
+            >
+              team@techbuilderz.in
+            </a>
+            <br />
+            <a
+              href="tel:+919398431573"
+              data-hover
+              className="link-underline"
+              style={{ color: "var(--fg)" }}
+            >
+              +91 93984 31573
+            </a>
+          </address>
         </div>
 
         {/* Navigate */}
@@ -183,7 +202,7 @@ export default function FooterSection() {
                 color: "var(--fg)",
               }}
             >
-              Q1 2026
+              Q2–Q3 2026
             </span>
           </div>
           <span
@@ -209,7 +228,7 @@ export default function FooterSection() {
             fontFamily: "var(--font-space), sans-serif",
           }}
         >
-          © 2026 TecH BuilderZ, Hyderabad, India.
+          © 2026 TechBuilderz, Hyderabad, India.
         </span>
         <span
           className="text-center"
@@ -223,16 +242,24 @@ export default function FooterSection() {
         >
           Designed with Passion
         </span>
-        <span
-          className="md:text-right"
+        <div
+          className="md:text-right flex flex-col md:items-end gap-2"
           style={{
             fontSize: 11,
             color: "var(--fg-muted)",
             fontFamily: "var(--font-space), sans-serif",
           }}
         >
-          Crafted in Hyderabad
-        </span>
+          <span>Crafted in Hyderabad</span>
+          <span className="flex gap-4">
+            <Link to="/privacy-policy" className="link-underline" style={{ color: "var(--fg-muted)" }}>
+              Privacy
+            </Link>
+            <Link to="/terms-and-conditions" className="link-underline" style={{ color: "var(--fg-muted)" }}>
+              Terms
+            </Link>
+          </span>
+        </div>
       </div>
 
       <style>{`

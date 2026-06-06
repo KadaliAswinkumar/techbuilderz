@@ -13,6 +13,13 @@ import { LoaderProvider } from "@/lib/LoaderContext";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import PageLoader from "@/components/PageLoader";
+import {
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  TWITTER_SITE,
+} from "@/lib/seo-meta";
+import { jsonLdScripts } from "@/lib/seo-schema";
+import { SITE_URL } from "@/lib/site-config";
 
 const FONTS_URL =
   "https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap";
@@ -77,26 +84,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      {
-        title: "TecH BuilderZ — Beyond the Interface. Crafting Tomorrow.",
-      },
-      {
-        name: "description",
-        content:
-          "We design and engineer immersive digital experiences at the intersection of 3D, motion, and storytelling. Creative studio based in Hyderabad, India.",
-      },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
       { name: "author", content: "TechBuilderz" },
       { name: "robots", content: "index, follow" },
       { name: "theme-color", content: "#0a0a0a" },
+      { name: "geo.placename", content: "Hyderabad, Telangana, India" },
+      { name: "geo.region", content: "IN-TG" },
+      { name: "geo.position", content: "17.3850;78.4867" },
+      { name: "ICBM", content: "17.3850, 78.4867" },
       { property: "og:site_name", content: "TechBuilderz" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_IN" },
+      { name: "twitter:site", content: TWITTER_SITE },
+      { name: "twitter:creator", content: TWITTER_SITE },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: FONTS_URL },
       { rel: "stylesheet", href: appCss },
     ],
+    scripts: jsonLdScripts,
   }),
   shellComponent: RootShell,
   component: RootComponent,
